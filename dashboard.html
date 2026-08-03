@@ -122,6 +122,41 @@
   .bigbtn { padding:10px 22px; font-size:14px; }
 </style>
 </head>
+
+<!-- ── AUTH GUARD ────────────────────────────── -->
+<script>
+(function(){
+  var SESSION_KEY = 'monhood_wallet_v1';
+  try {
+    var s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+    if (!s || !s.address || (Date.now() - s.ts > 8 * 60 * 60 * 1000)) {
+      sessionStorage.removeItem(SESSION_KEY);
+      window.location.replace('/login.html?next=' + encodeURIComponent(location.pathname));
+    } else {
+      // inject wallet pill once DOM is ready
+      document.addEventListener('DOMContentLoaded', function(){
+        var addr = s.address;
+        var short = addr.slice(0,6) + '...' + addr.slice(-4);
+        var pill = document.createElement('div');
+        pill.id = 'wallet-pill';
+        pill.title = addr;
+        pill.style.cssText = 'display:flex;align-items:center;gap:6px;background:#12161f;border:1px solid #232a38;border-radius:8px;padding:4px 10px;font-size:11px;font-family:ui-monospace,Menlo,monospace;color:#3fb950;cursor:default;flex-shrink:0;';
+        pill.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:#3fb950;display:inline-block;animation:pulse2 1.2s infinite"></span>' + short +
+          '<button title="Disconnect" onclick="doLogout()" style="background:none;border:none;color:#8b95a5;cursor:pointer;font-size:13px;padding:0 0 0 4px;line-height:1;" onmouseover="this.style.color='#f85149'" onmouseout="this.style.color='#8b95a5'">&#x2715;</button>';
+        var header = document.querySelector('header');
+        if (header) header.appendChild(pill);
+      });
+    }
+  } catch(e) {
+    window.location.replace('/login.html');
+  }
+  window.doLogout = function(){
+    sessionStorage.removeItem(SESSION_KEY);
+    window.location.replace('/login.html');
+  };
+})();
+</script>
+
 <body>
 <header>
   <h1>Monhood · Live Meme Coin Scanner</h1>
