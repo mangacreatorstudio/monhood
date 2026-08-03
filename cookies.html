@@ -32,6 +32,19 @@ td:first-child{color:var(--fg);font-weight:600;font-family:ui-monospace,Menlo,mo
 .tag-ess{display:inline-block;background:rgba(59,185,80,.1);color:var(--green);padding:1px 8px;border-radius:5px;font-size:11px;font-weight:700;}
 footer{padding:20px 24px;text-align:center;color:var(--dim);font-size:11px;border-top:1px solid var(--border);}
 footer a{color:var(--dim);margin:0 8px;}footer a:hover{color:var(--fg);}
+
+.table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+@media(max-width:639px){
+  nav { padding:0 14px; }
+  main { padding:36px 16px 60px; }
+  h1 { font-size:1.6rem; }
+  h2 { font-size:1rem; margin-top:32px; }
+  body { font-size:14px; }
+  table { font-size:12px; min-width:520px; }
+  th,td { padding:7px 9px; }
+  footer { padding:14px 16px; }
+  footer a { margin:0 6px; }
+}
 </style>
 </head>
 <body>
@@ -50,7 +63,7 @@ footer a{color:var(--dim);margin:0 8px;}footer a:hover{color:var(--fg);}
   <h2>2. How We Use Cookies and Storage</h2>
   <p>Monhood uses only <strong>essential</strong> cookies and browser storage. We do not use advertising, tracking, or profiling cookies.</p>
 
-  <table>
+  <div class="table-wrap"><table>
     <thead>
       <tr><th>Name / Key</th><th>Type</th><th>Purpose</th><th>Expires</th></tr>
     </thead>
@@ -74,7 +87,7 @@ footer a{color:var(--dim);margin:0 8px;}footer a:hover{color:var(--fg);}
         <td>Persistent (localStorage, no expiry)</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 
   <h2>3. Third-Party Cookies</h2>
   <p>Monhood is hosted on GitHub Pages. GitHub may set its own cookies or collect server log data in accordance with <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">GitHub's Privacy Statement</a>. We do not control GitHub's cookie behaviour.</p>

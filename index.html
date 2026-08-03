@@ -279,12 +279,75 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 
 .btn-launch{padding:6px 16px;background:linear-gradient(135deg,#f7931a,#ff6b35);color:#fff;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;flex-shrink:0;white-space:nowrap;}
 .btn-launch:hover{opacity:.88;text-decoration:none;}
-@media(max-width:600px){
-  .navlinks a{font-size:11px;padding:5px 7px;}
-  .hero{padding:48px 16px 40px;}
-  .sec-inner{padding:48px 16px;}
-  .sview{padding:8px;}
-  footer{justify-content:center;text-align:center;}
+
+/* ── Demo wrapper overflow ── */
+.demo-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+/* ══ MOBILE FIRST — base overrides ══ */
+@media(max-width:639px){
+  /* Nav */
+  #topnav{padding:0 14px;gap:8px;height:52px;}
+  .navlinks{display:none;}                       /* hide text links; logo + CTA stays */
+  .btn-launch{font-size:12px;padding:5px 12px;}
+
+  /* Hero */
+  .hero{padding:40px 16px 36px;}
+  .hero h2{font-size:clamp(1.6rem,7vw,2rem);letter-spacing:-1px;}
+  .hero p{font-size:.95rem;}
+  .btn-row{flex-direction:column;align-items:stretch;gap:10px;max-width:300px;margin:0 auto;}
+  .btn-primary,.btn-outline{text-align:center;padding:13px 20px;font-size:14px;}
+
+  /* Ticker */
+  .ticker-bar{display:none;}
+
+  /* Demo section labels */
+  .sec-label{margin-bottom:8px;}
+
+  /* Demo outer */
+  .demo-outer{padding:0;}
+  .demo-banner{flex-direction:column;align-items:flex-start;gap:6px;padding:10px 14px;}
+
+  /* App chrome inside demo */
+  .app-header{gap:6px;padding:8px 12px;}
+  .app-header h1{font-size:13px;}
+  .stat{font-size:11px;}
+  .scan-nav{gap:4px;padding:6px 10px;}
+  .tabbtn{font-size:11px;padding:4px 9px;}
+  .sview{padding:6px 8px;}
+
+  /* Tables inside demo */
+  .pbody{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table{font-size:11px;}
+  th,td{padding:6px 8px;}
+
+  /* Section wrappers */
+  .sec-inner{padding:40px 16px;}
+  .sec-inner.narrow{padding:40px 16px;}
+  .sec-title{font-size:1.4rem;margin-bottom:28px;}
+
+  /* Windows table */
+  .win-table{font-size:12px;}
+  .win-table th:nth-child(3),.win-table td:nth-child(3){display:none;} /* hide desc col, too wide */
+  .win-name{white-space:normal;}
+
+  /* Stack grid — 2 col on mobile */
+  .stack-grid{grid-template-columns:repeat(2,1fr);}
+  .stack-item{padding:12px;}
+
+  /* Footer */
+  footer{flex-direction:column;align-items:center;text-align:center;padding:20px 16px;gap:12px;}
+  .flinks{flex-wrap:wrap;justify-content:center;gap:12px;}
+}
+
+/* ══ TABLET — 640-1023px ══ */
+@media(min-width:640px) and (max-width:1023px){
+  .navlinks a{font-size:12px;padding:5px 8px;}
+  .btn-launch{font-size:12px;padding:5px 13px;}
+  .hero{padding:56px 24px 48px;}
+  .sec-inner{padding:48px 20px;}
+  .stack-grid{grid-template-columns:repeat(3,1fr);}
+  .pbody{overflow-x:auto;}
+  .win-table th:nth-child(3),.win-table td:nth-child(3){font-size:12px;}
 }
 </style>
 </head>
@@ -354,7 +417,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 </div>
 
 <!-- app chrome -->
-<div style="max-width:1200px;margin:0 auto;padding:0 16px 32px;">
+<div class="demo-outer" style="max-width:1200px;margin:0 auto;padding:0 16px 32px;">
 <div style="border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);overflow:hidden;">
   <div class="app-header">
     <span style="font-size:17px">🦬</span>
