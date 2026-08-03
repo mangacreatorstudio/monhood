@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Monhood</title>
+<meta name="description" content="Monhood is a self-hosted meme coin scanner for Robinhood Chain, BSC, and Base. Learn what it is, how it works, and why we built it."/>
+<link rel="canonical" href="https://moonhood.fun/about.html"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<meta name="theme-color" content="#f7931a"/>
+<style>
+:root{--bg:#0b0e14;--panel:#12161f;--panel2:#161b26;--border:#232a38;--fg:#e6edf3;--dim:#8b95a5;--accent:#4a9eff;--green:#3fb950;--rh:#f7931a;--bsc:#f0b90b;--base:#5b8fff;--radius:12px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--fg);font:15px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+
+/* nav */
+nav{padding:0 24px;height:52px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--border);background:rgba(11,14,20,.96);backdrop-filter:blur(12px);position:sticky;top:0;z-index:10;}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--fg);text-decoration:none;}
+.logo-icon{width:28px;height:28px;background:linear-gradient(135deg,#f7931a,#ff6b35);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+nav a.back{color:var(--dim);font-size:13px;text-decoration:none;margin-left:auto;}
+nav a.back:hover{color:var(--fg);}
+
+/* layout */
+main{flex:1;max-width:740px;margin:0 auto;padding:60px 24px 90px;}
+
+/* hero block */
+.page-pill{display:inline-block;background:rgba(247,147,26,.12);border:1px solid rgba(247,147,26,.25);color:var(--rh);padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px;}
+h1{font-size:2.1rem;font-weight:800;letter-spacing:-.6px;line-height:1.15;margin-bottom:16px;}
+.lead{font-size:1.05rem;color:#c8d1db;line-height:1.75;margin-bottom:52px;max-width:620px;}
+
+/* sections */
+.section{margin-bottom:52px;}
+h2{font-size:1.05rem;font-weight:700;color:var(--fg);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+p{color:#c8d1db;margin-bottom:14px;line-height:1.8;}
+ul{padding-left:20px;color:#c8d1db;margin-bottom:14px;}
+ul li{margin-bottom:8px;line-height:1.7;}
+strong{color:var(--fg);}
+a{color:var(--accent);}a:hover{text-decoration:underline;}
+
+/* chain pills */
+.chain-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+.cpill{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:10px;font-size:13px;font-weight:600;border:1px solid;}
+.cpill.rh{background:rgba(247,147,26,.1);border-color:rgba(247,147,26,.3);color:var(--rh);}
+.cpill.bsc{background:rgba(240,185,11,.08);border-color:rgba(240,185,11,.25);color:var(--bsc);}
+.cpill.base{background:rgba(91,143,255,.1);border-color:rgba(91,143,255,.3);color:var(--base);}
+.cpill-dot{width:7px;height:7px;border-radius:50%;}
+
+/* how it works steps */
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--border);}
+.step:last-child{border-bottom:none;}
+.step-num{width:32px;height:32px;border-radius:50%;background:rgba(74,158,255,.12);border:1px solid rgba(74,158,255,.25);color:var(--accent);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-body h3{font-size:14px;font-weight:700;margin-bottom:5px;}
+.step-body p{color:var(--dim);font-size:13px;margin:0;line-height:1.65;}
+
+/* stat strip */
+.stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0;}
+.stat-box{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px 16px;text-align:center;}
+.stat-n{display:block;font-size:1.5rem;font-weight:800;letter-spacing:-1px;color:var(--fg);margin-bottom:4px;}
+.stat-l{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--dim);}
+
+/* cta */
+.cta-block{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:36px 32px;text-align:center;margin-top:56px;}
+.cta-block h2{border:none;padding:0;margin-bottom:10px;font-size:1.25rem;}
+.cta-block p{color:var(--dim);font-size:14px;margin-bottom:24px;}
+.btn-cta{display:inline-block;background:linear-gradient(135deg,#f7931a,#ff6b35);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;transition:opacity .15s,transform .1s;}
+.btn-cta:hover{opacity:.88;transform:translateY(-1px);text-decoration:none;}
+
+/* footer */
+footer{padding:20px 24px;text-align:center;color:var(--dim);font-size:11px;border-top:1px solid var(--border);}
+footer a{color:var(--dim);margin:0 8px;}
+footer a:hover{color:var(--fg);}
+
+/* mobile */
+@media(max-width:639px){
+  nav{padding:0 14px;}
+  main{padding:36px 16px 60px;}
+  h1{font-size:1.65rem;}
+  h2{font-size:1rem;}
+  body{font-size:14px;}
+  .stat-strip{grid-template-columns:repeat(3,1fr);gap:8px;}
+  .stat-n{font-size:1.2rem;}
+  .cta-block{padding:24px 20px;}
+  footer{padding:14px 16px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/"><span class="logo-icon">🦬</span> Monhood</a>
+  <a class="back" href="/">Back to Home</a>
+</nav>
+
+<main>
+
+  <div class="page-pill">About</div>
+  <h1>Built for people who want to catch meme coins early, not hear about them late.</h1>
+  <p class="lead">Monhood is a self-hosted scanner that watches Robinhood Chain, BSC, and Base around the clock. New tokens get scored by an AI engine every ten minutes. You see the data, the rationale, and the on-chain context before most people have even noticed the token exists.</p>
+
+  <div class="section">
+    <h2>What it is</h2>
+    <p>Monhood is not a browser extension. It is not a SaaS dashboard you subscribe to. It is a Python application that runs on your own machine or a cheap VPS, pulls live on-chain data, and serves a browser-based dashboard only you can see.</p>
+    <p>That means no middleman sitting between you and the data. No API rate limits set by someone else. No subscription that goes dark the moment the service decides to change its pricing. Your scanner, your rules, your uptime.</p>
+
+    <div class="chain-row">
+      <span class="cpill rh"><span class="cpill-dot" style="background:var(--rh)"></span>Robinhood Chain</span>
+      <span class="cpill bsc"><span class="cpill-dot" style="background:var(--bsc)"></span>BSC</span>
+      <span class="cpill base"><span class="cpill-dot" style="background:var(--base)"></span>Base</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Your machine watches the chain</h3>
+          <p>The scanner polls Robinhood Chain, BSC, and Base in parallel. Every new token deployment triggers a record. The raw data includes the deployer address, creation time, cross-chain activity, and early transaction counts.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>The AI engine scores each token</h3>
+          <p>Every ten minutes, an AI pass runs across tokens in your configured market cap range. It reads holder distribution, volume trajectory, creator history, and social signals, then writes a score from 1 to 100 with a plain-English reason. No black box, no mystery number.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>You see it in the dashboard</h3>
+          <p>Eight windows cover everything from fresh launches to scored tokens to deep PDF reports. The interface updates live. Nothing is static, nothing is delayed by a server you do not control.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Alerts go wherever you want</h3>
+          <p>If a token crosses your score threshold, Monhood can fire a Telegram message. You set the threshold. You pick the chat. It is entirely optional, but traders who run it rarely turn it off.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="stat-strip">
+      <div class="stat-box"><span class="stat-n">8</span><span class="stat-l">Windows</span></div>
+      <div class="stat-box"><span class="stat-n">3</span><span class="stat-l">Chains</span></div>
+      <div class="stat-box"><span class="stat-n">10m</span><span class="stat-l">AI Cycle</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Why we built it</h2>
+    <p>The meme coin space moves fast. A token that looks ordinary at hour one can have a completely different profile at hour three. Most traders find out about a token after it has already made its move, because they are relying on social feeds, group chats, or scanners that update every few hours.</p>
+    <p>We wanted something that ran continuously, scored honestly, and showed us the context that actually matters: who deployed it, whether smart money touched it, how the holder spread looks in the first few hours, and whether the X activity is organic or coordinated.</p>
+    <p>After building it for personal use and getting consistent results with it, we decided to share the source. Monhood is not a product trying to extract subscription fees. It is a tool we use ourselves and maintain because it works.</p>
+  </div>
+
+  <div class="section">
+    <h2>Who it is for</h2>
+    <p>Monhood is built for traders who are comfortable running a Python script and pointing it at an RPC endpoint. You do not need to be a developer, but you should be comfortable with a terminal.</p>
+    <ul>
+      <li><strong>Self-hosted traders</strong> who want full control over their data pipeline and do not want to rely on a third-party service that could go offline or change its terms.</li>
+      <li><strong>Early-stage hunters</strong> who are focused on the first few hours of a token's life, where most of the signal and most of the noise both live.</li>
+      <li><strong>Multi-chain traders</strong> covering Robinhood Chain, BSC, and Base simultaneously, without flipping between three different tools.</li>
+      <li><strong>AI-curious traders</strong> who want a scored list every cycle but also want to see the reasoning behind each score, not just a number.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>A note on risk</h2>
+    <p>Meme coins are high-risk assets. A high score from Monhood reflects on-chain and social signals at the time of scoring. It is not financial advice and it is not a guarantee of performance. Markets move in ways no scanner can predict. Use the tool as one input among many, not as the only reason to enter a position.</p>
+    <p>We are transparent about this because we use Monhood ourselves and we know what it can and cannot do. It catches patterns. It does not catch everything, and it is not trying to.</p>
+  </div>
+
+  <div class="section">
+    <h2>Get the source</h2>
+    <p>Monhood is available on GitHub. The README covers setup, configuration, and the settings that matter most for your market cap range and chain preferences. If you run into something that does not work, open an issue and we will look at it.</p>
+    <p>For general questions or to show us what you have built with it, reach out on X at <a href="https://x.com/moonhoodfun" target="_blank">@moonhoodfun</a>.</p>
+  </div>
+
+  <div class="cta-block">
+    <h2>Ready to run your own scanner?</h2>
+    <p>Set up takes about fifteen minutes. Everything you need is in the README.</p>
+    <a class="btn-cta" href="/login.html">Open Dashboard</a>
+  </div>
+
+</main>
+
+<footer>
+  <span>© 2026 Monhood</span>
+  <a href="/">Home</a>
+  <a href="/about.html">About</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="/terms.html">Terms</a>
+  <a href="/cookies.html">Cookies</a>
+</footer>
+
+</body>
+</html>
