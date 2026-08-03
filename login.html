@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in — Monhood</title>
+  <meta name="description" content="Log in to your Monhood account.">
+  <link rel="icon" href="/logo.svg"><link rel="stylesheet" href="/site.css">
+</head>
+<body data-auth-page="login">
+  <div class="site-shell">
+    <nav class="site-nav"><a class="brand" href="/"><img src="/logo.svg" alt="">Monhood</a><div class="site-links"><a href="/about">About</a><a href="/credentials">Credentials</a></div><div class="auth-links" data-auth-links><a class="auth-strong" href="/signup">Create account</a></div></nav>
+    <main class="page auth-page">
+      <section class="auth-intro"><div class="eyebrow">Welcome back</div><h1>Return to your <span>research desk.</span></h1><p>Sign in to keep your Monhood identity and account experience in one place.</p><div class="actions"><a class="button ghost" href="/">Continue to public dashboard</a></div></section>
+      <section class="auth-card"><div class="clerk-mount" data-clerk-mount></div></section>
+    </main>
+  </div>
+  <script>window.MONHOOD_AUTH={publishableKey:__CLERK_PUBLISHABLE_KEY__,basePath:""};</script>
+  <script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js"></script><script src="/site.js"></script>
+</body>
+</html>

@@ -1,10 +1,11 @@
 """Robinhood meme monitor — multi-window demo. FastAPI app + state persistence."""
 import asyncio
+import json
 import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 
 import analyze
 import clawby
@@ -14,6 +15,15 @@ import util
 import wallets
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+CLERK_PUBLISHABLE_KEY = os.getenv("CLERK_PUBLISHABLE_KEY", "")
+
+
+def _page(filename: str) -> HTMLResponse:
+    """Serve a public page and inject only Clerk's browser-safe publishable key."""
+    with open(os.path.join(HERE, filename), encoding="utf-8") as page_file:
+        content = page_file.read()
+    safe_key = json.dumps(CLERK_PUBLISHABLE_KEY).replace("<", "\\u003c")
+    return HTMLResponse(content.replace("__CLERK_PUBLISHABLE_KEY__", safe_key))
 
 
 # ---------------- state persistence ----------------
@@ -136,6 +146,46 @@ app = FastAPI(title="Robinhood Meme Monitor", lifespan=lifespan)
 @app.get("/")
 async def index():
     return FileResponse(os.path.join(HERE, "dashboard.html"))
+
+
+@app.get("/about")
+async def about():
+    return _page("about.html")
+
+
+@app.get("/credentials")
+async def credentials():
+    return _page("credentials.html")
+
+
+@app.get("/login")
+async def login():
+    return _page("login.html")
+
+
+@app.get("/signup")
+async def signup():
+    return _page("signup.html")
+
+
+@app.get("/account")
+async def account():
+    return _page("account.html")
+
+
+@app.get("/site.css")
+async def site_css():
+    return FileResponse(os.path.join(HERE, "site.css"), media_type="text/css")
+
+
+@app.get("/site.js")
+async def site_js():
+    return FileResponse(os.path.join(HERE, "site.js"), media_type="application/javascript")
+
+
+@app.get("/logo.svg")
+async def logo():
+    return FileResponse(os.path.join(HERE, "logo.svg"), media_type="image/svg+xml")
 
 
 @app.get("/api/w1")
