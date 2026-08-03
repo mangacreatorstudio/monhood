@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Monhood — Robinhood Memescan</title>
+<title>Monhood | Robinhood Memescan</title>
 <meta name="description" content="Real-time meme-coin monitor & AI scoring dashboard for Robinhood Chain, BSC, and Base. Powered by Clawby API."/>
 <style>
 /* ── shared tokens ────────────────────────────────── */
@@ -30,8 +30,6 @@ pre code{background:none;border:none;padding:0;font-size:12px;}
 .navlinks a{padding:6px 12px;border-radius:8px;color:var(--dim);font-size:13px;font-weight:500;transition:color .15s,background .15s;}
 .navlinks a:hover{color:var(--fg);background:rgba(255,255,255,.05);text-decoration:none;}
 .navlinks a.active{color:var(--fg);background:rgba(255,255,255,.07);}
-.nav-gh{margin-left:auto;background:var(--rh);color:#000!important;padding:5px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none!important;transition:opacity .15s;}
-.nav-gh:hover{opacity:.85;}
 
 /* ── section wrappers ──────────────────────────────── */
 section{scroll-margin-top:58px;}
@@ -243,7 +241,6 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
     <a href="#requirements">Setup</a>
     <a href="#stack">Stack</a>
   </div>
-  <a class="nav-gh" href="https://github.com/mangacreatorstudio/monhood" target="_blank">⭐ GitHub</a>
 </nav>
 
 <!-- ── HERO ────────────────────────────── -->
@@ -251,10 +248,10 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <div class="hero">
   <div class="hero-badge">🦬 Robinhood Chain · BSC · Base</div>
   <h2>Real-time Meme Coin<br/>Monitor &amp; <em>AI Scanner</em></h2>
-  <p>Seven live windows + automated AI scoring + illustrated PDF reports. Watches Robinhood Chain launches, ranks the hottest memes, and scores every token 1–100 with rationale — entirely via <a href="https://www.openclawby.com/" target="_blank">Clawby API</a>.</p>
+  <p>Seven live windows + automated AI scoring + illustrated PDF reports. Watches Robinhood Chain launches, ranks the hottest memes, and scores every token 1–100 with rationale, entirely via <a href="https://www.openclawby.com/" target="_blank">Clawby API</a>.</p>
   <div class="btn-row">
     <a class="btn-primary" href="#demo">▶ Try the Demo</a>
-    <a class="btn-outline" href="https://github.com/mangacreatorstudio/monhood" target="_blank">Clone on GitHub</a>
+    <a class="btn-outline" href="#requirements">View Setup Guide</a>
   </div>
 </div>
 
@@ -315,7 +312,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
       <div class="chain-icon">🔵</div>
       <div class="chain-chip">Base (Coinbase L2)</div>
       <h3>Base</h3>
-      <p>Dedicated AI scoring window (⑦) identical to BSC but targeting Base memecoins — independent mcap/age config, full on-chain + holder + X data gather, per-scorer Telegram alert.</p>
+      <p>Dedicated AI scoring window (⑦) identical to BSC but targeting Base memecoins, with independent mcap/age config, full on-chain + holder + X data gather, and a per-scorer Telegram alert.</p>
       <div class="tag-row">
         <span class="tag">Window ⑦</span>
         <span class="tag">AI scoring</span>
@@ -332,7 +329,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <div style="max-width:1200px;margin:0 auto;padding:32px 16px 0;">
   <div class="sec-label" style="text-align:center;margin-bottom:12px;">Interactive Demo</div>
   <div style="text-align:center;margin-bottom:16px;">
-    <span style="font-size:1.3rem;font-weight:800;letter-spacing:-.3px;">Live scanner UI — simulated data</span><br>
+    <span style="font-size:1.3rem;font-weight:800;letter-spacing:-.3px;">Live scanner UI - simulated data</span><br>
     <span style="color:var(--dim);font-size:13px;">Same UI as the real self-hosted app · click tabs · watch AI scoring animate in real-time</span>
   </div>
 </div>
@@ -340,8 +337,8 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <!-- demo banner -->
 <div style="max-width:1200px;margin:0 auto 0;padding:0 16px;">
 <div class="demo-banner" style="border-radius:var(--radius) var(--radius) 0 0;border:1px solid #1e3150;border-bottom:none;">
-  <span>🎮 Simulated data — real app requires Python + Clawby API key · <a href="#requirements">setup guide ↓</a></span>
-  <a href="https://github.com/mangacreatorstudio/monhood" target="_blank">⭐ Clone &amp; run locally →</a>
+  <span>🎮 Simulated data - real app requires Python + Clawby API key · <a href="#requirements">setup guide ↓</a></span>
+  <a href="#requirements">⭐ Setup and run locally →</a>
 </div>
 </div>
 
@@ -489,11 +486,11 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   <table class="win-table">
     <thead><tr><th>Window</th><th>Name</th><th>Description</th></tr></thead>
     <tbody>
-      <tr><td><span class="win-id">①</span></td><td class="win-name">New Launches</td><td class="win-desc">Real-time factory event feed — new tokens with creator KOL check and tx counts across 5 chains <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-all">+4</span></td></tr>
+      <tr><td><span class="win-id">①</span></td><td class="win-name">New Launches</td><td class="win-desc">Real-time factory event feed: new tokens with creator KOL check and tx counts across 5 chains <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-all">+4</span></td></tr>
       <tr><td><span class="win-id">②</span></td><td class="win-name">Top 100</td><td class="win-desc">Top 100 memes by 24h volume with full market data and X buzz <span class="chain-pill cp-rh">RH</span></td></tr>
       <tr><td><span class="win-id">③</span></td><td class="win-name">Watchlist</td><td class="win-desc">Favorites with per-CA refresh interval, KOL/smart-money counts, and one-click deep analysis <span class="chain-pill cp-all">all chains</span></td></tr>
-      <tr><td><span class="win-id">④</span></td><td class="win-name">New ≤3 Days</td><td class="win-desc">Only coins with real on-chain creation time ≤ 3 days, top 100 by volume — excludes old coins that just graduated <span class="chain-pill cp-rh">RH</span></td></tr>
-      <tr><td><span class="win-id">⑤</span></td><td class="win-name">AI · Robinhood</td><td class="win-desc">Auto AI scoring every 10 min on a configurable mcap band — on-chain + holder + trading + social → score 1–100 + rationale <span class="chain-pill cp-rh">RH</span></td></tr>
+      <tr><td><span class="win-id">④</span></td><td class="win-name">New ≤3 Days</td><td class="win-desc">Only coins with real on-chain creation time ≤ 3 days, top 100 by volume; excludes old coins that just graduated <span class="chain-pill cp-rh">RH</span></td></tr>
+      <tr><td><span class="win-id">⑤</span></td><td class="win-name">AI · Robinhood</td><td class="win-desc">Auto AI scoring every 10 min on a configurable mcap band: on-chain + holder + trading + social → score 1–100 + rationale <span class="chain-pill cp-rh">RH</span></td></tr>
       <tr><td><span class="win-id">⑥</span></td><td class="win-name">AI · BSC</td><td class="win-desc">Same automated AI scoring for BSC memecoins with independent mcap band and age filter <span class="chain-pill cp-bsc">BSC</span></td></tr>
       <tr><td><span class="win-id">⑦</span></td><td class="win-name">AI · Base</td><td class="win-desc">Same automated AI scoring for Base memecoins with independent mcap band and age filter <span class="chain-pill cp-base">Base</span></td></tr>
       <tr><td><span class="win-id">⑧</span></td><td class="win-name">Deep Report</td><td class="win-desc">Pick chain + paste contract → gather all RPC / holder / trade / X data → illustrated PDF (~3–8 min) <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-bsc">BSC</span><span class="chain-pill cp-base">Base</span></td></tr>
@@ -513,7 +510,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   <div class="req-grid">
     <div class="req-card required">
       <div class="req-head"><div class="req-icon">🔑</div><h4>Clawby API Key</h4><span class="req-label">Required</span></div>
-      <p>Sign up free at <a href="https://www.openclawby.com/" target="_blank">openclawby.com</a>. Keys start with <code>pk_</code>. Handles all data — trending tokens, token info, holders, kline, X search, and all RPC calls. No Blockscout needed.</p>
+      <p>Sign up free at <a href="https://www.openclawby.com/" target="_blank">openclawby.com</a>. Keys start with <code>pk_</code>. Handles all data: trending tokens, token info, holders, kline, X search, and all RPC calls. No Blockscout needed.</p>
     </div>
     <div class="req-card required">
       <div class="req-head"><div class="req-icon">🐍</div><h4>Python 3.9+</h4><span class="req-label">Required</span></div>
@@ -522,14 +519,14 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
     <div class="req-card optional">
       <div class="req-head"><div class="req-icon">🤖</div><h4>AI Engine</h4><span class="req-label">Optional</span></div>
       <ul>
-        <li><b>Claude Code CLI</b> — <code>claude</code> logged in</li>
-        <li><b>Codex CLI</b> — <code>codex login</code> or <code>OPENAI_API_KEY</code></li>
+        <li><b>Claude Code CLI</b>: <code>claude</code> logged in</li>
+        <li><b>Codex CLI</b>: <code>codex login</code> or <code>OPENAI_API_KEY</code></li>
       </ul>
       <p style="margin-top:8px">Required only for Windows ⑤⑥⑦ AI scoring and ⑧ deep reports. Monitoring (①②③④) works without it.</p>
     </div>
     <div class="req-card optional">
       <div class="req-head"><div class="req-icon">📱</div><h4>Telegram Bot</h4><span class="req-label">Optional</span></div>
-      <p>Get a bot token from <a href="https://t.me/BotFather" target="_blank">@BotFather</a>. Configure in the Admin window — enter token, chat ID, and score threshold. Fires when any token exceeds the threshold.</p>
+      <p>Get a bot token from <a href="https://t.me/BotFather" target="_blank">@BotFather</a>. Configure in the Admin window: enter token, chat ID, and score threshold. Fires when any token exceeds the threshold.</p>
     </div>
     <div class="req-card optional">
       <div class="req-head"><div class="req-icon">🖥</div><h4>Google Chrome</h4><span class="req-label">Optional</span></div>
@@ -542,7 +539,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
     <div class="phead"><span class="t">📄 .env configuration</span></div>
     <div style="padding:16px 18px;">
       <pre><code><span style="color:var(--dim)"># copy from .env.example, then edit</span>
-CLAWBY_API_KEY=pk_your_key_here   <span style="color:var(--dim)"># required — from openclawby.com</span>
+CLAWBY_API_KEY=pk_your_key_here   <span style="color:var(--dim)"># required, from openclawby.com</span>
 PORT=8799                          <span style="color:var(--dim)"># optional, default 8799</span></code></pre>
     </div>
   </div>
@@ -551,8 +548,7 @@ PORT=8799                          <span style="color:var(--dim)"># optional, de
   <div class="panel" style="margin-bottom:20px;">
     <div class="phead"><span class="t">⚡ Install &amp; run</span></div>
     <div style="padding:16px 18px;">
-      <pre><code><span style="color:var(--dim)"># 1. clone</span>
-git clone https://github.com/mangacreatorstudio/monhood
+      <pre><code><span style="color:var(--dim)"># 1. open the project folder</span>
 cd monhood
 
 <span style="color:var(--dim)"># 2. add your Clawby key</span>
@@ -572,11 +568,11 @@ bash run.sh</code></pre>
     <table class="settings-table">
       <thead><tr><th>Setting</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td>Concurrency</td><td>1–100, default 10 — paired with a built-in ~6 req/s limiter</td></tr>
+        <tr><td>Concurrency</td><td>1-100, default 10, paired with a built-in ~6 req/s limiter</td></tr>
         <tr><td>Report output dir</td><td>Where analysis PDFs are saved, default <code>./reports</code></td></tr>
-        <tr><td>Report language</td><td>中文 / English — controls AI-generated report text</td></tr>
-        <tr><td>Analysis engine</td><td><b>Claude Code</b> or <b>Codex</b> — swap anytime from Admin</td></tr>
-        <tr><td>Per-window interval</td><td>① 5s · ②④ 300s · ⑤⑥⑦ 600s — adjustable per window</td></tr>
+        <tr><td>Report language</td><td>中文 / English, controls AI-generated report text</td></tr>
+        <tr><td>Analysis engine</td><td><b>Claude Code</b> or <b>Codex</b>, switch anytime from Admin</td></tr>
+        <tr><td>Per-window interval</td><td>① 5s · ②④ 300s · ⑤⑥⑦ 600s, adjustable per window</td></tr>
         <tr><td>Per-scorer mcap band</td><td>⑤⑥⑦ each get independent min/max mcap + "created ≤ N days" filter</td></tr>
         <tr><td>Launchpad toggles</td><td>Enable/disable individual platforms Window ① listens to</td></tr>
         <tr><td>Scan-field customization</td><td>Turn off holders/X/trading per-window to skip fetch &amp; hide column (saves API quota)</td></tr>
@@ -611,9 +607,9 @@ bash run.sh</code></pre>
 <div class="sec-inner narrow" style="padding-top:40px;padding-bottom:72px;">
   <div class="cta-box">
     <h2>Ready to scan?</h2>
-    <p>Clone the repo, drop your Clawby key into <code>.env</code>, and run <code>bash run.sh</code> — the venv installs itself.</p>
+    <p>Open the project folder, add your Clawby key to <code>.env</code>, and run <code>bash run.sh</code>. The virtual environment installs itself.</p>
     <div class="btn-row">
-      <a class="btn-primary" href="https://github.com/mangacreatorstudio/monhood" target="_blank">Clone on GitHub</a>
+      <a class="btn-primary" href="#requirements">View Setup Guide</a>
       <a class="btn-outline" href="https://www.openclawby.com/" target="_blank">Get Clawby Key →</a>
     </div>
   </div>
@@ -622,9 +618,8 @@ bash run.sh</code></pre>
 
 <!-- ── FOOTER ─────────────────────────── -->
 <footer>
-  <div>© 2025 Monhood · Fork of <a href="https://github.com/openclawby/Robinhood_Memescan" target="_blank">Robinhood_Memescan</a></div>
+  <div>© 2025 Monhood · Real-time meme research dashboard</div>
   <div class="flinks">
-    <a href="https://github.com/mangacreatorstudio/monhood" target="_blank">GitHub</a>
     <a href="https://www.openclawby.com/" target="_blank">Clawby</a>
     <a href="https://robinhoodchain.blockscout.com" target="_blank">Explorer</a>
     <a href="README.md" target="_blank">README</a>
@@ -637,10 +632,10 @@ bash run.sh</code></pre>
 <script>
 const rnd=(a,b)=>Math.random()*(b-a)+a;
 const ri=(a,b)=>Math.floor(rnd(a,b));
-function usd(n){if(n==null||!isFinite(+n))return'<span class="dim2">—</span>';n=+n;const a=Math.abs(n);
+function usd(n){if(n==null||!isFinite(+n))return'<span class="dim2">-</span>';n=+n;const a=Math.abs(n);
   if(a>=1e9)return'$'+(n/1e9).toFixed(2)+'B';if(a>=1e6)return'$'+(n/1e6).toFixed(2)+'M';
   if(a>=1e3)return'$'+(n/1e3).toFixed(1)+'K';return'$'+n.toFixed(n<1?(n<0.01?6:4):2);}
-function num(n){return n==null?'<span class="dim2">—</span>':(+n).toLocaleString();}
+function num(n){return n==null?'<span class="dim2">-</span>':(+n).toLocaleString();}
 function short(a){return a?a.slice(0,6)+'…'+a.slice(-4):'';}
 function addr(a,chain){const exp=chain==='bsc'?'https://bscscan.com/token/':chain==='base'?'https://basescan.org/token/':'https://robinhoodchain.blockscout.com/token/';return`<a href="${exp}${a}" target="_blank">${short(a)}</a><button class="cp" onclick="doCopy('${a}',this)">⧉</button>`;}
 function ago(s){if(s<60)return Math.floor(s)+'s';if(s<3600)return Math.floor(s/60)+'m';return Math.floor(s/3600)+'h';}
@@ -677,14 +672,14 @@ function mkToken(sym,platform,chain){
 
 const RATS={
   hi:["Strong buy signal: creator has 1,200+ Robinhood txs across 5 chains with 2 prior successful launches. Top-10 holder concentration under 28%. 847 txns in the last 24h with rising volume curve. X mentions up 340% in 4h window.",
-    "Exceptional on-chain profile. Deployer is verified KOL active on 3 chains. Holder distribution clean — no single wallet above 6%. Liquidity locked 90 days. Volume/mcap ratio 0.41 — strong organic demand.",
+    "Exceptional on-chain profile. Deployer is verified KOL active on 3 chains. Holder distribution clean - no single wallet above 6%. Liquidity locked 90 days. Volume/mcap ratio 0.41 - strong organic demand.",
     "High conviction: 3 smart-money wallets entered within 30 blocks of deploy. Pool ETH reserves 12.4 Ξ. Creator has 2,100 rh txs, 0 rug history. Holders growing +18%/hr at time of scan. Early entry window."],
-  mid:["Moderate signal. Fair holder spread (top-10 = 34%), decent volume but creator wallet is thin — only 42 rh txs total. X engagement sparse at 12 mentions. Watch for volume confirmation before entry.",
+  mid:["Moderate signal. Fair holder spread (top-10 = 34%), decent volume but creator wallet is thin - only 42 rh txs total. X engagement sparse at 12 mentions. Watch for volume confirmation before entry.",
     "Mixed profile. Volume/mcap ratio healthy at 0.29 but top-3 holders control 31%. No KOL detected. 2 smart-money touches. Proceed with caution; wait for the second-hour candle before sizing in.",
-    "Neutral-to-slight-positive. Liquidity adequate, creator not flagged. Price action erratic — 3 large sells in last 45 min. X buzz minimal. Score reflects uncertainty; revisit at next cycle."],
-  lo:["Weak signal. Creator wallet has only 8 total txs across all chains — likely fresh deployer. Top holder controls 19% single-wallet (red flag). Volume spike appears bot-driven (uniform tx sizes). X = 0 mentions.",
+    "Neutral-to-slight-positive. Liquidity adequate, creator not flagged. Price action erratic - 3 large sells in last 45 min. X buzz minimal. Score reflects uncertainty; revisit at next cycle."],
+  lo:["Weak signal. Creator wallet has only 8 total txs across all chains - likely fresh deployer. Top holder controls 19% single-wallet (red flag). Volume spike appears bot-driven (uniform tx sizes). X = 0 mentions.",
     "Avoid. Deployer previously associated with 2 honeypots on ETH (via holder-graph). Holder count stagnant. Sells outpacing buys 2.3:1. Liquidity thin (<1 Ξ). Score penalized heavily for creator risk.",
-    "Low conviction. No smart money detected, no KOL, thin liquidity. Created <2h ago — insufficient data for a reliable score. Revisit after 500+ holder milestone and second-hour volume confirmation."]
+    "Low conviction. No smart money detected, no KOL, thin liquidity. Created <2h ago - insufficient data for a reliable score. Revisit after 500+ holder milestone and second-hour volume confirmation."]
 };
 function rat(s){if(s>=75)return RATS.hi[ri(0,3)];if(s>=45)return RATS.mid[ri(0,3)];return RATS.lo[ri(0,3)];}
 
@@ -707,10 +702,10 @@ function rW1(){document.getElementById('body-w1').innerHTML=[...RH].sort((a,b)=>
   <td class="l mono">${addr(t.ca,'robinhood')}</td>
   <td>${ago(t.created_ago)} ago</td>
   <td class="l mono">${addr(t.creator,'robinhood')}</td>
-  <td class="l ${t.creator_is_kol?'kol-yes':''}">${t.creator_is_kol?`✓ KOL${t.creator_twitter?` <a href="https://x.com/${t.creator_twitter}" target="_blank">@${t.creator_twitter}</a>`:''}` :'<span class="dim2">—</span>'}</td>
+  <td class="l ${t.creator_is_kol?'kol-yes':''}">${t.creator_is_kol?`✓ KOL${t.creator_twitter?` <a href="https://x.com/${t.creator_twitter}" target="_blank">@${t.creator_twitter}</a>`:''}` :'<span class="dim2">-</span>'}</td>
   <td>${t.tx_rh>0?`<span class="pos">${t.tx_rh.toLocaleString()}</span>`:'<span class="dim2">0</span>'}</td>
-  <td>${t.tx_eth||'<span class="dim2">—</span>'}</td><td>${t.tx_bsc||'<span class="dim2">—</span>'}</td>
-  <td>${t.tx_base||'<span class="dim2">—</span>'}</td><td>${t.tx_hev||'<span class="dim2">—</span>'}</td>
+  <td>${t.tx_eth||'<span class="dim2">-</span>'}</td><td>${t.tx_bsc||'<span class="dim2">-</span>'}</td>
+  <td>${t.tx_base||'<span class="dim2">-</span>'}</td><td>${t.tx_hev||'<span class="dim2">-</span>'}</td>
   <td><button class="mini" onclick="toast('★ added')">★</button></td>
 </tr>`).join('');}
 
@@ -752,7 +747,7 @@ function scoreRow(t){
     <td><span class="score" style="color:${c}">${t.score}</span>${sbar(t.score)}</td>
     <td class="wrap"><span style="color:var(--dim);font-size:12px">${t.rationale}</span></td>
     <td>${usd(t.mcap)}</td><td>${usd(t.volume24)}</td><td>${num(t.holders)}</td><td>${num(t.transfers)}</td>
-    <td>${t.creator_is_kol?'<span class="pos">1 KOL</span>':'<span class="dim2">—</span>'} / <span class="${t.tx_rh>500?'pos':'dim2'}">${ri(0,3)} smart$</span></td>
+    <td>${t.creator_is_kol?'<span class="pos">1 KOL</span>':'<span class="dim2">-</span>'} / <span class="${t.tx_rh>500?'pos':'dim2'}">${ri(0,3)} smart$</span></td>
     <td class="dim2" style="font-size:11px">${ago(Date.now()/1000-t.scored_at)} ago</td>
     <td><button class="mini" onclick="toast('★ added')">★</button></td>
   </tr>`;}
@@ -819,7 +814,7 @@ function fakeReport(){
       <div class="track" style="width:260px"><div class="fill" style="width:${p}%"></div></div><span class="dim2">${p}%</span></div>
       <span style="color:var(--dim);font-size:12px">${ph}</span>`;
     if(p>=100){clearInterval(iv);btn.disabled=false;
-      st.innerHTML=`<a class="bigbtn" href="#" onclick="return false">📄 Open PDF Report</a> <button class="ghost" style="margin-left:8px;font-size:11px" onclick="fakeReport()">🔄 Regenerate</button><br><span style="color:var(--dim);font-size:11px;margin-top:6px;display:block">demo — PDF renders with real Clawby data on a live instance</span>`;}
+      st.innerHTML=`<a class="bigbtn" href="#" onclick="return false">📄 Open PDF Report</a> <button class="ghost" style="margin-left:8px;font-size:11px" onclick="fakeReport()">🔄 Regenerate</button><br><span style="color:var(--dim);font-size:11px;margin-top:6px;display:block">demo - PDF renders with real Clawby data on a live instance</span>`;}
   },380);}
 
 /* nav active link on scroll */
