@@ -86,6 +86,9 @@ pre code{background:none;border:none;padding:0;font-size:12px;}
 #topnav{position:sticky;top:0;z-index:100;background:rgba(11,14,20,.96);backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;gap:0;height:52px;}
 .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:-.2px;margin-right:20px;text-decoration:none!important;color:var(--fg)!important;}
+.logo-text{display:flex;flex-direction:column;gap:0;}
+.logo-name{font-size:14px;font-weight:800;letter-spacing:-.3px;line-height:1.15;color:var(--fg);}
+.logo-tag{font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:var(--dim);line-height:1.2;}
 .logo span{width:30px;height:30px;background:linear-gradient(135deg,#f7931a,#ff6b35);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 2px 10px rgba(247,147,26,.35);}
 .navlinks{display:flex;gap:2px;flex:1;}
 .navlinks a{padding:6px 12px;border-radius:8px;color:var(--dim);font-size:13px;font-weight:500;transition:color .15s,background .15s;}
@@ -377,7 +380,11 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <!-- ── TOP NAV ─────────────────────────── -->
 <nav id="topnav">
   <a class="logo" href="#">
-    <span>🦬</span> Monhood
+    <span>🦬</span>
+    <div class="logo-text">
+      <span class="logo-name">Monhood</span>
+      <span class="logo-tag">Meme Coin Scanner</span>
+    </div>
   </a>
   <div class="navlinks">
     <a href="#demo">Demo</a>
@@ -400,7 +407,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <div class="hero">
   <div class="hero-badge">🦬 Robinhood Chain · BSC · Base</div>
   <h2>Catch every launch.<br><em>Score it before it moves.</em></h2>
-  <p>Watches Robinhood Chain, BSC, and Base around the clock. New tokens get a 1–100 score and a short written reason — refreshed every 10 minutes, running on your own machine.</p>
+  <p>Watches Robinhood Chain, BSC, and Base around the clock. New tokens get a 1–100 score and a short written reason, refreshed every 10 minutes, running on your own machine.</p>
   <div class="hero-stats">
     <div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">Live Windows</span></div>
     <div class="hstat-sep"></div>
@@ -442,14 +449,14 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   <div class="sec-label" style="text-align:center;margin-bottom:12px;">Try It Yourself</div>
   <div style="text-align:center;margin-bottom:16px;">
     <span style="font-size:1.3rem;font-weight:800;letter-spacing:-.3px;">Same UI as the self-hosted app</span><br>
-    <span style="color:var(--dim);font-size:13px;">Simulated data. All eight windows are open — click around.</span>
+    <span style="color:var(--dim);font-size:13px;">Simulated data. All eight windows are open. Click around.</span>
   </div>
 </div>
 
 <!-- demo banner -->
 <div style="max-width:1200px;margin:0 auto 0;padding:0 16px;">
 <div class="demo-banner" style="border-radius:var(--radius) var(--radius) 0 0;border:1px solid #1e3150;border-bottom:none;">
-  <span>Simulated data — production needs Python 3.9 on your own server</span>
+  <span>Simulated data. Production needs Python 3.9 on your own server.</span>
   <a href="#requirements">Get the source on GitHub</a>
 </div>
 </div>
@@ -601,7 +608,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
       <tr><td><span class="win-id">①</span></td><td class="win-name">New Launches</td><td class="win-desc">Every token that just deployed, as it hits the chain. Shows the creator's KOL history, early tx count, and cross-chain activity so you can judge it in the first few minutes. <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-all">+4</span></td></tr>
       <tr><td><span class="win-id">②</span></td><td class="win-name">Top 100</td><td class="win-desc">Top 100 by 24h volume on Robinhood Chain. Full market data, X activity, and a direct link to the chart. <span class="chain-pill cp-rh">RH</span></td></tr>
       <tr><td><span class="win-id">③</span></td><td class="win-name">Watchlist</td><td class="win-desc">Tokens you're tracking. Set your own refresh rate per address, watch KOL and smart money flow in, and kick off a deep report any time. <span class="chain-pill cp-all">all chains</span></td></tr>
-      <tr><td><span class="win-id">④</span></td><td class="win-name">New ≤3 Days</td><td class="win-desc">Top 100 filtered to tokens under 72 hours old. On-chain age is verified — migrated contracts don't sneak in and inflate the list. <span class="chain-pill cp-rh">RH</span></td></tr>
+      <tr><td><span class="win-id">④</span></td><td class="win-name">New ≤3 Days</td><td class="win-desc">Top 100 filtered to tokens under 72 hours old. On-chain age is verified so migrated contracts don't sneak in and inflate the list. <span class="chain-pill cp-rh">RH</span></td></tr>
       <tr><td><span class="win-id">⑤</span></td><td class="win-name">AI · Robinhood</td><td class="win-desc">Runs a scoring pass every 10 minutes. Pulls holder data, trade history, and X signals, then writes a 1–100 score with a plain-English reason for each token in your market-cap range. <span class="chain-pill cp-rh">RH</span></td></tr>
       <tr><td><span class="win-id">⑥</span></td><td class="win-name">AI · BSC</td><td class="win-desc">Same scoring engine as ⑤, running independently on BSC. Its market-cap band and age cutoff are set separately. <span class="chain-pill cp-bsc">BSC</span></td></tr>
       <tr><td><span class="win-id">⑦</span></td><td class="win-name">AI · Base</td><td class="win-desc">Same scoring engine as ⑤, running independently on Base. Its market-cap band and age cutoff are set separately. <span class="chain-pill cp-base">Base</span></td></tr>
@@ -633,7 +640,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 
 <!-- ── FOOTER ─────────────────────────── -->
 <footer>
-  <div>© 2026 Monhood — built for Robinhood Chain, BSC, and Base.</div>
+  <div>© 2026 Monhood. Built for Robinhood Chain, BSC, and Base.</div>
   <div class="flinks">
     <a href="/login.html">Dashboard</a>
     <a href="/about.html">About</a>
