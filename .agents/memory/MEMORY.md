@@ -1,1 +1,0 @@
-- [GitHub history divergence](github-history-divergence.md) — when local and remote histories are unrelated, integrate on a new branch instead of force-pushing main.
