@@ -337,53 +337,6 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 </div>
 </section>
 
-<!-- ── CHAINS ─────────────────────────── -->
-<section id="chains">
-<div class="sec-inner">
-  <div class="sec-label">Chain Coverage</div>
-  <div class="sec-title">Three Chains, One Dashboard</div>
-  <div class="chains-grid">
-    <div class="chain-card rh">
-      <div class="chain-icon">🦬</div>
-      <div class="chain-chip">Primary Chain</div>
-      <h3>Robinhood Chain</h3>
-      <p>The primary focus of the scanner. Ingests every new token minted through launchpad factory events, maintains a live Top-100 by 24 h volume, and runs automated AI scoring across a configurable market-cap band on a 10-minute cycle.</p>
-      <div class="tag-row">
-        <span class="tag">Chain ID 4663</span>
-        <span class="tag">EVM-compatible</span>
-        <span class="tag">Windows ①②③④⑤</span>
-        <span class="tag">Blockscout explorer</span>
-        <span class="tag">Clawby RPC</span>
-      </div>
-    </div>
-    <div class="chain-card bsc">
-      <div class="chain-icon">🟡</div>
-      <div class="chain-chip">BNB Smart Chain</div>
-      <h3>BNB Smart Chain</h3>
-      <p>Window 6 runs an independent AI scoring pass over BSC memecoins every 10 minutes. Market-cap band and token-age filter are configured separately from Robinhood Chain, and each high-scoring token can trigger a Telegram alert.</p>
-      <div class="tag-row">
-        <span class="tag">Window ⑥</span>
-        <span class="tag">AI scoring</span>
-        <span class="tag">Custom mcap band</span>
-        <span class="tag">Age filter</span>
-      </div>
-    </div>
-    <div class="chain-card base">
-      <div class="chain-icon">🔵</div>
-      <div class="chain-chip">Base (Coinbase L2)</div>
-      <h3>Base (Coinbase L2)</h3>
-      <p>Window 7 mirrors the BSC scoring engine but targets Base memecoins exclusively. Market-cap range and creation-age cutoff are set independently, giving you precise control over what the AI reviews each cycle.</p>
-      <div class="tag-row">
-        <span class="tag">Window ⑦</span>
-        <span class="tag">AI scoring</span>
-        <span class="tag">Custom mcap band</span>
-        <span class="tag">Coinbase L2</span>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
 <!-- ── DEMO ────────────────────────────── -->
 <section id="demo">
 <div style="max-width:1200px;margin:0 auto;padding:32px 16px 0;">
@@ -534,6 +487,53 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   </div>
 
 </div><!-- /app chrome -->
+</div>
+</section>
+
+<!-- ── CHAINS ─────────────────────────── -->
+<section id="chains">
+<div class="sec-inner">
+  <div class="sec-label">Chain Coverage</div>
+  <div class="sec-title">Three Chains, One Dashboard</div>
+  <div class="chains-grid">
+    <div class="chain-card rh">
+      <div class="chain-icon">🦬</div>
+      <div class="chain-chip">Primary Chain</div>
+      <h3>Robinhood Chain</h3>
+      <p>The primary focus of the scanner. Ingests every new token minted through launchpad factory events, maintains a live Top-100 by 24 h volume, and runs automated AI scoring across a configurable market-cap band on a 10-minute cycle.</p>
+      <div class="tag-row">
+        <span class="tag">Chain ID 4663</span>
+        <span class="tag">EVM-compatible</span>
+        <span class="tag">Windows ①②③④⑤</span>
+        <span class="tag">Blockscout explorer</span>
+        <span class="tag">Clawby RPC</span>
+      </div>
+    </div>
+    <div class="chain-card bsc">
+      <div class="chain-icon">🟡</div>
+      <div class="chain-chip">BNB Smart Chain</div>
+      <h3>BNB Smart Chain</h3>
+      <p>Window 6 runs an independent AI scoring pass over BSC memecoins every 10 minutes. Market-cap band and token-age filter are configured separately from Robinhood Chain, and each high-scoring token can trigger a Telegram alert.</p>
+      <div class="tag-row">
+        <span class="tag">Window ⑥</span>
+        <span class="tag">AI scoring</span>
+        <span class="tag">Custom mcap band</span>
+        <span class="tag">Age filter</span>
+      </div>
+    </div>
+    <div class="chain-card base">
+      <div class="chain-icon">🔵</div>
+      <div class="chain-chip">Base (Coinbase L2)</div>
+      <h3>Base (Coinbase L2)</h3>
+      <p>Window 7 mirrors the BSC scoring engine but targets Base memecoins exclusively. Market-cap range and creation-age cutoff are set independently, giving you precise control over what the AI reviews each cycle.</p>
+      <div class="tag-row">
+        <span class="tag">Window ⑦</span>
+        <span class="tag">AI scoring</span>
+        <span class="tag">Custom mcap band</span>
+        <span class="tag">Coinbase L2</span>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 
