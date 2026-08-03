@@ -1,0 +1,17 @@
+{
+  "name": "Monhood — Robinhood Memescan",
+  "short_name": "Monhood",
+  "description": "Real-time meme-coin monitor & AI scoring dashboard for Robinhood Chain, BSC, and Base.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0e14",
+  "theme_color": "#f7931a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    }
+  ]
+}
