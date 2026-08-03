@@ -864,5 +864,177 @@ document.addEventListener('click',function(e){
   if(d.classList.contains('open')&&!d.contains(e.target)&&!document.getElementById('nav-toggle').contains(e.target))closeNav();
 });
 </script>
+
+<!-- ── ANIMATION LAYER (additive — no existing code changed) ── -->
+<style>
+/* Smooth anchor scrolling */
+html{scroll-behavior:smooth;}
+
+/* ── Scroll-reveal base ── */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);}
+.rv.vis{opacity:1;transform:none;}
+.rv.d1{transition-delay:.06s;}.rv.d2{transition-delay:.13s;}.rv.d3{transition-delay:.20s;}
+.rv.d4{transition-delay:.27s;}.rv.d5{transition-delay:.34s;}.rv.d6{transition-delay:.41s;}
+.rv.d7{transition-delay:.48s;}.rv.d8{transition-delay:.55s;}
+
+/* ── Hero entrance sequence ── */
+@keyframes _fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes _sc{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.hero-badge{animation:_fu .6s cubic-bezier(.22,1,.36,1) .08s both;}
+.hero h2{animation:_fu .7s cubic-bezier(.22,1,.36,1) .20s both;}
+.hero p{animation:_fu .65s cubic-bezier(.22,1,.36,1) .34s both;}
+.hero-stats{animation:_sc .65s cubic-bezier(.22,1,.36,1) .46s both;}
+.btn-row{animation:_fu .6s cubic-bezier(.22,1,.36,1) .56s both;}
+
+/* ── Hero glow breathe ── */
+@keyframes _glow{0%,100%{opacity:.65;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.1)}}
+.hero::before{animation:_glow 6s ease-in-out infinite;}
+
+/* ── Tab panel fade ── */
+@keyframes _tf{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sview.active{animation:_tf .2s ease both;}
+
+/* ── Scroll progress bar ── */
+#_spb{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,#f7931a,#ff6b35,#ffd000);z-index:99999;pointer-events:none;transition:width .12s linear;}
+
+/* ── Card hover glows ── */
+.chain-card{transition:border-color .22s,transform .22s,box-shadow .22s!important;}
+.chain-card.rh:hover{box-shadow:0 10px 40px rgba(247,147,26,.18)!important;}
+.chain-card.bsc:hover{box-shadow:0 10px 40px rgba(240,185,11,.14)!important;}
+.chain-card.base:hover{box-shadow:0 10px 40px rgba(91,143,255,.16)!important;}
+
+/* ── Feat card hover ── */
+.feat{transition:border-color .2s,transform .2s,box-shadow .2s!important;}
+.feat:hover{transform:translateY(-4px)!important;border-color:#2e3850!important;box-shadow:0 8px 28px rgba(0,0,0,.35)!important;}
+
+/* ── Stack item hover ── */
+.stack-item{transition:border-color .18s,transform .18s!important;}
+.stack-item:hover{transform:translateY(-2px)!important;border-color:#2e3850!important;}
+
+/* ── Nav underline slide ── */
+.navlinks a{position:relative;}
+.navlinks a::after{content:'';position:absolute;left:50%;right:50%;bottom:3px;height:2px;background:var(--accent);border-radius:2px;transition:left .22s,right .22s;}
+.navlinks a:hover::after,.navlinks a.active::after{left:12px;right:12px;}
+
+/* ── Ripple ── */
+@keyframes _rp{to{transform:scale(4);opacity:0;}}
+._rr{position:absolute;border-radius:50%;background:rgba(255,255,255,.22);transform:scale(0);animation:_rp .5s linear;pointer-events:none;}
+.btn-primary,.btn-outline,.btn-gen,.bigbtn{overflow:hidden;}
+
+/* ── Ticker edge fade ── */
+.ticker-bar{-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
+
+/* ── Section label/title entrance ── */
+.sec-label,.sec-title{display:block;}
+
+/* ── Win table row highlight ── */
+.win-table tbody tr{transition:background .18s,transform .18s;}
+.win-table tbody tr:hover{transform:translateX(2px);}
+
+/* ── Hstat number hover ── */
+.hstat{cursor:default;transition:transform .2s;}
+.hstat:hover{transform:scale(1.06);}
+.hstat:hover .hstat-n{color:var(--rh);}
+.hstat-n{transition:color .25s;}
+</style>
+
+<script>
+(function(){
+  /* ── scroll progress bar ── */
+  var spb=document.createElement('div');spb.id='_spb';document.body.prepend(spb);
+  window.addEventListener('scroll',function(){
+    var pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
+    spb.style.width=Math.min(100,pct)+'%';
+  },{passive:true});
+
+  /* ── ripple on click ── */
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.btn-primary,.btn-outline,.btn-gen,.bigbtn');
+    if(!btn)return;
+    var r=document.createElement('span');r.className='_rr';
+    var rect=btn.getBoundingClientRect();
+    var sz=Math.max(rect.width,rect.height);
+    r.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(e.clientX-rect.left-sz/2)+'px;top:'+(e.clientY-rect.top-sz/2)+'px;';
+    btn.appendChild(r);r.addEventListener('animationend',function(){r.remove();});
+  });
+
+  /* ── scroll reveal ── */
+  var ds=['d1','d2','d3','d4','d5','d6','d7','d8'];
+  var vh=window.innerHeight;
+
+  function addRv(el,delay){
+    if(el.getBoundingClientRect().top>vh*0.92){
+      el.classList.add('rv');
+      if(delay)el.classList.add(delay);
+    }
+  }
+
+  /* section labels + titles */
+  document.querySelectorAll('.sec-label,.sec-title').forEach(function(el){addRv(el,'');});
+
+  /* chain cards, feat, stack items — staggered */
+  ['.chain-card','.feat','.stack-item'].forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el,i){addRv(el,ds[i%ds.length]);});
+  });
+
+  /* windows table rows */
+  document.querySelectorAll('.win-table tbody tr').forEach(function(el,i){addRv(el,ds[Math.min(i,7)]);});
+
+  /* panel in windows + stack section */
+  document.querySelectorAll('#windows .panel,#stack .panel,.cta-box').forEach(function(el){addRv(el,'');});
+
+  /* demo section label area */
+  document.querySelectorAll('#demo > div > div').forEach(function(el,i){if(i<2)addRv(el,ds[i]);});
+
+  /* observe */
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -32px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+  /* ── counter animation for hero stats ── */
+  function countUp(el,to,suffix,ms){
+    var start=null;
+    function step(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/ms,1);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(e*to)+suffix;
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var heroStats=document.querySelector('.hero-stats');
+  if(heroStats){
+    var fired=false;
+    var cio=new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting&&!fired){
+        fired=true;
+        var ns=heroStats.querySelectorAll('.hstat-n');
+        if(ns[0])countUp(ns[0],8,'',900);
+        if(ns[1])countUp(ns[1],3,'',750);
+        cio.disconnect();
+      }
+    },{threshold:0.6});
+    cio.observe(heroStats);
+  }
+
+  /* ── subtle mouse parallax on hero glow ── */
+  if(window.matchMedia('(hover:hover)').matches){
+    var hero=document.querySelector('.hero');
+    if(hero){
+      document.addEventListener('mousemove',function(e){
+        if(e.clientY>window.innerHeight*0.85)return;
+        var ox=(e.clientX/window.innerWidth-.5)*18;
+        var oy=(e.clientY/window.innerHeight-.5)*10;
+        hero.style.setProperty('--gx',ox+'px');
+        hero.style.setProperty('--gy',oy+'px');
+      },{passive:true});
+    }
+  }
+})();
+</script>
 </body>
 </html>
