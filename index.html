@@ -1,390 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Monhood — Robinhood Memescan</title>
-<meta name="description" content="Real-time meme-coin monitor & AI scoring dashboard for Robinhood Chain, BSC, and Base. Powered by Clawby API."/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monhood — Robinhood Memescan Demo</title>
 <style>
-  :root {
-    --bg: #0a0e17;
-    --bg2: #111724;
-    --bg3: #181f2e;
-    --accent: #f7931a;
-    --accent2: #00d4aa;
-    --accent3: #7b6bfa;
-    --text: #e8eaf0;
-    --dim: #7a8299;
-    --border: #1e2840;
-    --rh: #f7931a;
-    --bsc: #f0b90b;
-    --base: #0052ff;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.6; }
+:root{--bg:#0b0e14;--panel:#12161f;--panel2:#161b26;--border:#232a38;--fg:#e6edf3;--dim:#8b95a5;--accent:#4a9eff;--green:#3fb950;--red:#f85149;--amber:#d29922;--pink:#db61a2;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--fg);font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
 
-  /* NAV */
-  nav { position:sticky; top:0; z-index:100; background:rgba(10,14,23,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:0 32px; display:flex; align-items:center; justify-content:space-between; height:56px; }
-  .logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; letter-spacing:-.3px; }
-  .logo-icon { width:32px; height:32px; background:linear-gradient(135deg,#f7931a,#ff6b35); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px; }
-  .nav-links { display:flex; gap:24px; }
-  .nav-links a { color:var(--dim); text-decoration:none; font-size:14px; transition:color .2s; }
-  .nav-links a:hover { color:var(--text); }
-  .btn-gh { background:var(--accent); color:#000; padding:7px 18px; border-radius:8px; text-decoration:none; font-size:13px; font-weight:600; transition:opacity .2s; }
-  .btn-gh:hover { opacity:.85; }
+/* DEMO BANNER */
+.demo-banner{background:linear-gradient(90deg,#1a2e4a,#12213a);border-bottom:1px solid #2a4a7a;padding:7px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.demo-banner span{color:#6ab0ff;font-size:12px;}
+.demo-banner a{color:#4a9eff;font-size:12px;font-weight:600;text-decoration:none;}
+.demo-banner a:hover{text-decoration:underline;}
 
-  /* HERO */
-  .hero { padding:96px 32px 80px; text-align:center; max-width:900px; margin:0 auto; }
-  .hero-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(247,147,26,.12); border:1px solid rgba(247,147,26,.3); color:var(--accent); padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; margin-bottom:24px; }
-  .hero h1 { font-size:clamp(2.2rem,6vw,4rem); font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:20px; }
-  .hero h1 span { background:linear-gradient(135deg,#f7931a,#ff6b35,#ffcc00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .hero p { font-size:1.15rem; color:var(--dim); max-width:620px; margin:0 auto 36px; }
-  .hero-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-  .btn-primary { background:linear-gradient(135deg,#f7931a,#ff6b35); color:#fff; padding:12px 28px; border-radius:10px; text-decoration:none; font-weight:700; font-size:15px; transition:transform .2s,box-shadow .2s; }
-  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(247,147,26,.35); }
-  .btn-secondary { background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:12px 28px; border-radius:10px; text-decoration:none; font-weight:600; font-size:15px; transition:border-color .2s; }
-  .btn-secondary:hover { border-color:var(--accent); }
+header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,#12161f,#0f131b);border-bottom:1px solid var(--border);padding:9px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+h1{font-size:15px;margin:0;font-weight:700;letter-spacing:.2px;}
+.stat{color:var(--dim);font-size:12px;}.stat b{color:var(--fg);font-weight:600;}
+.grow{flex:1;}
+.indicator{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite;display:inline-block;margin-right:4px;}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(63,185,80,.4)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(63,185,80,0)}}
 
-  /* CHAIN CARDS */
-  .chains-section { padding:64px 32px; max-width:1100px; margin:0 auto; }
-  .section-label { text-align:center; font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--dim); margin-bottom:12px; }
-  .section-title { text-align:center; font-size:clamp(1.5rem,3vw,2.2rem); font-weight:800; letter-spacing:-.5px; margin-bottom:48px; }
-  .chains-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
-  .chain-card { background:var(--bg2); border:1px solid var(--border); border-radius:16px; padding:28px; position:relative; overflow:hidden; transition:border-color .25s,transform .25s; }
-  .chain-card:hover { transform:translateY(-4px); }
-  .chain-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:16px 16px 0 0; }
-  .chain-card.rh { border-color:rgba(247,147,26,.3); }
-  .chain-card.rh::before { background:linear-gradient(90deg,#f7931a,#ff6b35); }
-  .chain-card.rh:hover { border-color:rgba(247,147,26,.6); }
-  .chain-card.bsc { border-color:rgba(240,185,11,.2); }
-  .chain-card.bsc::before { background:linear-gradient(90deg,#f0b90b,#f8d030); }
-  .chain-card.bsc:hover { border-color:rgba(240,185,11,.5); }
-  .chain-card.base { border-color:rgba(0,82,255,.2); }
-  .chain-card.base::before { background:linear-gradient(90deg,#0052ff,#5b8fff); }
-  .chain-card.base:hover { border-color:rgba(0,82,255,.5); }
-  .chain-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:16px; }
-  .chain-card.rh .chain-icon { background:rgba(247,147,26,.15); }
-  .chain-card.bsc .chain-icon { background:rgba(240,185,11,.12); }
-  .chain-card.base .chain-icon { background:rgba(0,82,255,.12); }
-  .chain-badge { display:inline-block; padding:3px 10px; border-radius:6px; font-size:11px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; margin-bottom:10px; }
-  .chain-card.rh .chain-badge { background:rgba(247,147,26,.15); color:#f7931a; }
-  .chain-card.bsc .chain-badge { background:rgba(240,185,11,.12); color:#f0b90b; }
-  .chain-card.base .chain-badge { background:rgba(0,82,255,.12); color:#5b8fff; }
-  .chain-card h3 { font-size:1.25rem; font-weight:700; margin-bottom:8px; }
-  .chain-card p { font-size:14px; color:var(--dim); line-height:1.65; margin-bottom:16px; }
-  .chain-meta { display:flex; flex-wrap:wrap; gap:8px; }
-  .tag { background:var(--bg3); border:1px solid var(--border); color:var(--dim); font-size:12px; padding:3px 10px; border-radius:6px; }
+nav{background:var(--panel2);border-bottom:1px solid var(--border);padding:8px 14px;display:flex;gap:6px;flex-wrap:wrap;overflow-x:auto;}
+.tabbtn{padding:6px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--dim);background:var(--panel);font-weight:600;font-size:12px;white-space:nowrap;transition:all .15s;}
+.tabbtn:hover{color:var(--fg);border-color:#3a4560;}
+.tabbtn.on{color:#fff;background:var(--accent);border-color:var(--accent);}
 
-  /* FEATURES */
-  .features-section { padding:64px 32px; max-width:1100px; margin:0 auto; }
-  .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:48px; }
-  .feat { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:24px; }
-  .feat-num { width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,rgba(247,147,26,.15),rgba(255,107,53,.15)); border:1px solid rgba(247,147,26,.25); color:var(--accent); font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
-  .feat h4 { font-size:15px; font-weight:700; margin-bottom:6px; }
-  .feat p { font-size:13px; color:var(--dim); line-height:1.6; }
+.view{padding:12px 14px;display:none;}
+.view.active{display:block;}
 
-  /* WINDOWS TABLE */
-  .windows-section { padding:64px 32px; max-width:1000px; margin:0 auto; }
-  .win-table { width:100%; border-collapse:collapse; margin-top:48px; }
-  .win-table th { text-align:left; padding:10px 16px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--dim); border-bottom:1px solid var(--border); }
-  .win-table td { padding:14px 16px; font-size:14px; border-bottom:1px solid rgba(30,40,64,.5); vertical-align:top; }
-  .win-table tr:hover td { background:rgba(255,255,255,.02); }
-  .win-id { background:var(--bg3); border:1px solid var(--border); color:var(--accent); font-weight:700; font-size:12px; padding:3px 8px; border-radius:6px; white-space:nowrap; }
-  .win-name { font-weight:600; }
-  .win-desc { color:var(--dim); font-size:13px; }
-  .chain-pill { display:inline-block; font-size:11px; font-weight:600; padding:2px 7px; border-radius:5px; margin-left:4px; }
-  .cp-rh { background:rgba(247,147,26,.15); color:#f7931a; }
-  .cp-bsc { background:rgba(240,185,11,.12); color:#f0b90b; }
-  .cp-base { background:rgba(0,82,255,.12); color:#5b8fff; }
-  .cp-all { background:rgba(0,212,170,.1); color:#00d4aa; }
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.phead{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--panel2);border-bottom:1px solid var(--border);}
+.phead .t{font-weight:700;font-size:14px;}
+.phead .meta{color:var(--dim);font-size:12px;}
+.pbody{overflow-x:auto;}
 
-  /* STACK */
-  .stack-section { padding:64px 32px; max-width:900px; margin:0 auto; }
-  .stack-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:40px; }
-  .stack-item { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:16px; display:flex; align-items:center; gap:12px; }
-  .stack-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-  .stack-item .si-label { font-size:14px; font-weight:600; }
-  .stack-item .si-sub { font-size:12px; color:var(--dim); }
+.pill{font-size:11px;padding:2px 10px;border-radius:11px;background:#1a2030;color:var(--dim);display:inline-flex;align-items:center;gap:5px;font-weight:600;white-space:nowrap;}
+.pill.run{color:var(--green);background:#0f2a17;}
+.pill.idle{color:var(--dim);background:#1a2030;}
+.pill.paused{color:var(--amber);background:#2e2410;}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse2 1s infinite;}
+@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.2}}
 
-  /* CTA */
-  .cta { padding:80px 32px; text-align:center; }
-  .cta-box { max-width:640px; margin:0 auto; background:var(--bg2); border:1px solid var(--border); border-radius:20px; padding:48px 40px; }
-  .cta h2 { font-size:2rem; font-weight:800; letter-spacing:-.5px; margin-bottom:12px; }
-  .cta p { color:var(--dim); margin-bottom:28px; }
+.prog{display:flex;align-items:center;gap:10px;padding:7px 14px;background:#0f131b;border-bottom:1px solid var(--border);font-size:12px;}
+.prog .track{flex:1;height:6px;background:#1a2030;border-radius:4px;overflow:hidden;}
+.prog .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:4px;transition:width 1.5s ease;}
+.prog .lbl{white-space:nowrap;color:var(--dim);min-width:200px;}
 
-  /* FOOTER */
-  footer { border-top:1px solid var(--border); padding:32px; display:flex; justify-content:space-between; align-items:center; max-width:1100px; margin:0 auto; flex-wrap:wrap; gap:12px; color:var(--dim); font-size:13px; }
-  footer a { color:var(--dim); text-decoration:none; }
-  footer a:hover { color:var(--text); }
+table{border-collapse:collapse;width:100%;white-space:nowrap;}
+th,td{padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;}
+th:first-child,td:first-child,.l{text-align:left;}
+thead th{position:sticky;top:0;background:#1a2030;color:var(--dim);font-weight:600;font-size:11px;z-index:1;user-select:none;}
+tbody tr:hover{background:#161d2b;}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:11px;}
+.sym{font-weight:700;}
+.nm{color:var(--dim);font-size:11px;}
+.dim2{color:#39414f;}
+.score{font-size:15px;font-weight:800;}
+.score-bar{display:inline-block;width:36px;height:4px;border-radius:2px;vertical-align:middle;margin-left:5px;}
+.pos{color:var(--green);}
+.neg{color:var(--red);}
+.amber{color:var(--amber);}
+.scoring-row{background:#12341c!important;box-shadow:inset 3px 0 0 var(--green);}
+a{color:var(--accent);text-decoration:none;}a:hover{text-decoration:underline;}
+.badge{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;font-weight:600;}
+.badge-rh{background:rgba(247,147,26,.15);color:#f7931a;}
+.badge-bsc{background:rgba(240,185,11,.12);color:#f0b90b;}
+.badge-base{background:rgba(0,82,255,.12);color:#5b8fff;}
+.mini{background:transparent;border:none;cursor:pointer;color:var(--amber);font-size:13px;padding:0 3px;}
+.cp{background:transparent;border:none;cursor:pointer;color:var(--dim);font-size:11px;padding:0 2px;margin-left:2px;}
+.cp:hover{color:var(--fg);}
+.wrap{white-space:normal;max-width:400px;line-height:1.45;}
+.rationale{color:var(--dim);font-size:12px;}
+td.kol-yes{color:var(--green);font-weight:600;}
 
-  /* LIVE TICKER */
-  .ticker-bar { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:10px 0; overflow:hidden; }
-  .ticker-inner { display:flex; gap:48px; animation:ticker 30s linear infinite; white-space:nowrap; }
-  .ticker-inner:hover { animation-play-state:paused; }
-  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-  .tick-item { display:flex; align-items:center; gap:8px; font-size:13px; }
-  .tick-dot { width:6px; height:6px; border-radius:50%; }
-  .tick-label { color:var(--dim); }
-  .tick-val { font-weight:600; }
-  .tick-up { color:#00d4aa; }
-  .tick-dn { color:#ff5c5c; }
+/* platform logos */
+.plat{display:inline-flex;align-items:center;gap:5px;}
+.plat-dot{width:8px;height:8px;border-radius:50%;}
 
-  @media(max-width:600px){
-    nav { padding:0 16px; }
-    .hero { padding:64px 16px 48px; }
-    .chains-section,.features-section,.windows-section,.stack-section { padding:48px 16px; }
-    footer { justify-content:center; text-align:center; }
-  }
+/* ghost button */
+.ghost{background:transparent;border:1px solid var(--border);color:var(--dim);border-radius:7px;padding:4px 12px;cursor:pointer;font-size:12px;}
+.ghost:hover{border-color:var(--accent);color:var(--fg);}
+.ghost.sm{padding:2px 8px;font-size:11px;}
+
+/* report section */
+.rep-box{padding:18px 20px;}
+.rep-box p{color:var(--dim);margin-bottom:14px;font-size:13px;}
+.in-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;}
+.in{background:#0d1117;border:1px solid var(--border);color:var(--fg);border-radius:7px;padding:6px 10px;font-size:13px;}
+.in:focus{outline:none;border-color:var(--accent);}
+select.in{min-width:140px;}
+.btn-gen{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:7px 18px;cursor:pointer;font-weight:600;font-size:13px;}
+.btn-gen:hover{filter:brightness(1.12);}
+
+/* coin logo */
+.coin-logo{width:20px;height:20px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:5px;}
+.coin-circle{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;vertical-align:middle;margin-right:5px;flex-shrink:0;}
+
+/* toast */
+#toast{position:fixed;bottom:20px;right:20px;background:#1e2a3a;border:1px solid var(--accent);color:var(--fg);padding:9px 18px;border-radius:10px;font-size:13px;font-weight:500;z-index:999;display:none;animation:fadeIn .2s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* w8 report status */
+.rep-status-box{margin-top:10px;min-height:30px;}
+.bigbtn{background:var(--accent);color:#fff;padding:9px 22px;border-radius:9px;text-decoration:none;font-weight:700;font-size:13px;display:inline-block;}
+
+@media(max-width:640px){nav{padding:6px 10px;}.view{padding:8px 8px;}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">
-    <div class="logo-icon">🦬</div>
-    <span>Monhood</span>
-  </div>
-  <div class="nav-links">
-    <a href="#chains">Chains</a>
-    <a href="#features">Features</a>
-    <a href="#windows">Windows</a>
-    <a href="#stack">Stack</a>
-  </div>
-  <a class="btn-gh" href="https://github.com/mangacreatorstudio/monhood" target="_blank">⭐ GitHub</a>
-</nav>
-
-<!-- TICKER -->
-<div class="ticker-bar">
-  <div class="ticker-inner">
-    <div class="tick-item"><span class="tick-dot" style="background:#f7931a"></span><span class="tick-label">Robinhood Chain</span><span class="tick-val">Chain ID 4663</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#00d4aa"></span><span class="tick-label">AI Scoring</span><span class="tick-val tick-up">Live ⑤⑥⑦</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#f0b90b"></span><span class="tick-label">BSC</span><span class="tick-val">Window ⑥</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#0052ff"></span><span class="tick-label">Base</span><span class="tick-val">Window ⑦</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#7b6bfa"></span><span class="tick-label">PDF Reports</span><span class="tick-val">Window ⑧</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#ff5c5c"></span><span class="tick-label">Telegram Alerts</span><span class="tick-val">Optional</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#f7931a"></span><span class="tick-label">Powered by</span><span class="tick-val">Clawby API</span></div>
-    <!-- duplicate for seamless loop -->
-    <div class="tick-item"><span class="tick-dot" style="background:#f7931a"></span><span class="tick-label">Robinhood Chain</span><span class="tick-val">Chain ID 4663</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#00d4aa"></span><span class="tick-label">AI Scoring</span><span class="tick-val tick-up">Live ⑤⑥⑦</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#f0b90b"></span><span class="tick-label">BSC</span><span class="tick-val">Window ⑥</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#0052ff"></span><span class="tick-label">Base</span><span class="tick-val">Window ⑦</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#7b6bfa"></span><span class="tick-label">PDF Reports</span><span class="tick-val">Window ⑧</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#ff5c5c"></span><span class="tick-label">Telegram Alerts</span><span class="tick-val">Optional</span></div>
-    <div class="tick-item"><span class="tick-dot" style="background:#7b6bfa"></span><span class="tick-label">Powered by</span><span class="tick-val">Clawby API</span></div>
-  </div>
+<div class="demo-banner">
+  <span>🎮 Interactive Demo — data is simulated to show how the live scanner looks</span>
+  <a href="https://github.com/mangacreatorstudio/monhood" target="_blank">⭐ Clone &amp; Run Locally →</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">🦬 Robinhood Chain · BSC · Base</div>
-  <h1>Real-time Meme Coin<br/>Monitor & <span>AI Scanner</span></h1>
-  <p>Seven live windows + AI scoring + illustrated PDF reports. Watches Robinhood Chain launches, ranks hottest memes, and auto-scores tokens 1–100 with rationale — all via Clawby API.</p>
-  <div class="hero-btns">
-    <a class="btn-primary" href="https://github.com/mangacreatorstudio/monhood" target="_blank">🚀 Get Started</a>
-    <a class="btn-secondary" href="#windows">View All Windows →</a>
+<header>
+  <span style="font-size:20px">🦬</span>
+  <h1>Robinhood Meme Monitor</h1>
+  <span class="stat">block <b id="s-block">21,847,392</b></span>
+  <span class="stat">tokens <b id="s-tok">247</b></span>
+  <span class="stat">API <b id="s-api">1,842</b></span>
+  <span class="grow"></span>
+  <span id="s-act" class="stat"><span class="indicator"></span><span class="pos">⑤ ⑥ scanning</span></span>
+</header>
+
+<nav>
+  <button class="tabbtn on" onclick="tab('w1',this)">① New Launches</button>
+  <button class="tabbtn" onclick="tab('w2',this)">② Top 100</button>
+  <button class="tabbtn" onclick="tab('w4',this)">④ ≤3 Days</button>
+  <button class="tabbtn" onclick="tab('w5',this)">⑤ AI · RH</button>
+  <button class="tabbtn" onclick="tab('w6',this)">⑥ AI · BSC</button>
+  <button class="tabbtn" onclick="tab('w7',this)">⑦ AI · Base</button>
+  <button class="tabbtn" onclick="tab('w8',this)">⑧ Deep Report</button>
+</nav>
+
+<!-- ① NEW LAUNCHES -->
+<div class="view active" id="view-w1">
+<div class="panel">
+  <div class="phead">
+    <span class="t">① New Launches · Real-time</span>
+    <span class="pill run"><span class="dot"></span> scanning</span>
+    <span class="grow"></span>
+    <span class="meta" id="ph-w1">32 new today</span>
   </div>
-</section>
-
-<!-- CHAINS -->
-<section class="chains-section" id="chains">
-  <div class="section-label">Supported Chains</div>
-  <div class="section-title">Multi-Chain Coverage</div>
-  <div class="chains-grid">
-
-    <!-- ROBINHOOD -->
-    <div class="chain-card rh">
-      <div class="chain-icon">🦬</div>
-      <div class="chain-badge">Primary Chain</div>
-      <h3>Robinhood Chain</h3>
-      <p>The core chain. Monitors every new launch via launchpad factory events, tracks top-100 memes by volume, and runs automated AI scoring (Window ⑤) every 10 minutes across a configurable market-cap band.</p>
-      <div class="chain-meta">
-        <span class="tag">Chain ID 4663</span>
-        <span class="tag">EVM-compatible</span>
-        <span class="tag">Window ①②③④⑤</span>
-        <span class="tag">Blockscout Explorer</span>
-        <span class="tag">Clawby RPC</span>
-      </div>
-    </div>
-
-    <!-- BSC -->
-    <div class="chain-card bsc">
-      <div class="chain-icon">🟡</div>
-      <div class="chain-badge">BNB Smart Chain</div>
-      <h3>BSC</h3>
-      <p>Dedicated AI scoring window (Window ⑥) with its own configurable market-cap band and age filter. Scans BSC memecoins on the same 10-minute cadence, scores 1–100, optional Telegram alerts on threshold.</p>
-      <div class="chain-meta">
-        <span class="tag">Window ⑥</span>
-        <span class="tag">AI Scoring</span>
-        <span class="tag">Custom mcap band</span>
-        <span class="tag">Age filter</span>
-      </div>
-    </div>
-
-    <!-- BASE -->
-    <div class="chain-card base">
-      <div class="chain-icon">🔵</div>
-      <div class="chain-badge">Base (Coinbase L2)</div>
-      <h3>Base</h3>
-      <p>Dedicated AI scoring window (Window ⑦) identical to the BSC scorer but targeting Base memecoins. Independent mcap / age configuration, own scoring cadence, full on-chain + holder + X data gathering.</p>
-      <div class="chain-meta">
-        <span class="tag">Window ⑦</span>
-        <span class="tag">AI Scoring</span>
-        <span class="tag">Custom mcap band</span>
-        <span class="tag">Coinbase L2</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features-section" id="features">
-  <div class="section-label">What it does</div>
-  <div class="section-title">Core Capabilities</div>
-  <div class="features-grid">
-    <div class="feat">
-      <div class="feat-num">🔍</div>
-      <h4>New Launch Detection</h4>
-      <p>Polls factory events via Clawby RPC (<code>eth_getLogs</code>) for brand-new tokens. Enriches creator with KOL check and tx counts across 5 chains.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-num">🏆</div>
-      <h4>Top 100 Ranking</h4>
-      <p>Ranks memecoins by 24h volume with price, mcap, liquidity, holders, ETH in pool, and X buzz. Refreshes continuously.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-num">🤖</div>
-      <h4>AI Scoring (1–100)</h4>
-      <p>Claude Code / Codex reads on-chain + holder + trading + social data and scores each token. Includes a 1–5 sentence rationale.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-num">📄</div>
-      <h4>Illustrated PDF Reports</h4>
-      <p>Full PDF with price line chart, volume bars, holder-distribution doughnut, timeline, and total tx count — generated in 3–8 minutes.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-num">⭐</div>
-      <h4>Watchlist</h4>
-      <p>Favorite any contract address. Per-CA refresh interval, KOL/smart-money counts, one-click deep analysis.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-num">📱</div>
-      <h4>Telegram Alerts</h4>
-      <p>Optional bot integration. Fire an alert when an AI score clears a configured threshold. Per-chain alert settings.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-num">🌐</div>
-      <h4>Bilingual UI</h4>
-      <p>Full English / 中文 support. Language picker on first open — entire interface switches instantly.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-num">💾</div>
-      <h4>Local Persistence</h4>
-      <p>Favorites and every setting live in <code>state.json</code>. Fully restored on restart — no database required.</p>
-    </div>
-  </div>
-</section>
-
-<!-- WINDOWS TABLE -->
-<section class="windows-section" id="windows">
-  <div class="section-label">Dashboard Windows</div>
-  <div class="section-title">8 Windows + Admin Panel</div>
-  <table class="win-table">
-    <thead>
-      <tr>
-        <th>Window</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="win-id">①</span></td>
-        <td class="win-name">New Launches</td>
-        <td class="win-desc">Real-time factory event feed — new tokens with creator KOL check and tx counts across 5 chains <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-all">+4</span></td>
-      </tr>
-      <tr>
-        <td><span class="win-id">②</span></td>
-        <td class="win-name">Top 100</td>
-        <td class="win-desc">Top 100 memes by 24h volume with full market data and X buzz <span class="chain-pill cp-rh">RH</span></td>
-      </tr>
-      <tr>
-        <td><span class="win-id">③</span></td>
-        <td class="win-name">Watchlist</td>
-        <td class="win-desc">Favorites with per-CA refresh, KOL/smart-money counts, and one-click deep analysis <span class="chain-pill cp-all">all chains</span></td>
-      </tr>
-      <tr>
-        <td><span class="win-id">④</span></td>
-        <td class="win-name">New ≤3 Days</td>
-        <td class="win-desc">Only coins with real on-chain creation time ≤ 3 days, top 100 by volume (excludes old coins that just graduated) <span class="chain-pill cp-rh">RH</span></td>
-      </tr>
-      <tr>
-        <td><span class="win-id">⑤</span></td>
-        <td class="win-name">AI · Robinhood</td>
-        <td class="win-desc">Auto AI scoring every 10 min on a configurable mcap band — on-chain + holder + trading + social → score 1–100 + rationale <span class="chain-pill cp-rh">RH</span></td>
-      </tr>
-      <tr>
-        <td><span class="win-id">⑥</span></td>
-        <td class="win-name">AI · BSC</td>
-        <td class="win-desc">Same automated AI scoring for BSC memecoins with independent mcap band and age filter <span class="chain-pill cp-bsc">BSC</span></td>
-      </tr>
-      <tr>
-        <td><span class="win-id">⑦</span></td>
-        <td class="win-name">AI · Base</td>
-        <td class="win-desc">Same automated AI scoring for Base memecoins with independent mcap band and age filter <span class="chain-pill cp-base">Base</span></td>
-      </tr>
-      <tr>
-        <td><span class="win-id">⑧</span></td>
-        <td class="win-name">Deep Report</td>
-        <td class="win-desc">Pick chain + paste contract → gather all RPC / holder / trade / X data → illustrated PDF (3–8 min) <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-bsc">BSC</span><span class="chain-pill cp-base">Base</span></td>
-      </tr>
-      <tr>
-        <td><span class="win-id">⚙️</span></td>
-        <td class="win-name">Admin</td>
-        <td class="win-desc">Full control: concurrency, engine (Claude/Codex), per-window interval, per-scorer mcap band, scan-field toggles, Telegram alerts, runtime status</td>
-      </tr>
-    </tbody>
+  <div class="pbody">
+  <table>
+    <thead><tr>
+      <th class="l">Platform</th><th class="l">Token</th><th class="l mono">CA</th>
+      <th>Created</th><th class="l">Creator</th><th class="l">KOL?</th>
+      <th>rh txs</th><th>ETH txs</th><th>BSC txs</th><th>BASE txs</th><th>hEVM txs</th><th></th>
+    </tr></thead>
+    <tbody id="body-w1"></tbody>
   </table>
-</section>
-
-<!-- STACK -->
-<section class="stack-section" id="stack">
-  <div class="section-label">Tech Stack</div>
-  <div class="section-title">Built On</div>
-  <div class="stack-grid">
-    <div class="stack-item"><span class="stack-dot" style="background:#f7931a"></span><div><div class="si-label">Clawby API</div><div class="si-sub">All data source</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span><div><div class="si-label">Python 3.9+</div><div class="si-sub">FastAPI + uvicorn</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#009688"></span><div><div class="si-label">FastAPI</div><div class="si-sub">Async HTTP server</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#00d4aa"></span><div><div class="si-label">httpx</div><div class="si-sub">Async HTTP client</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#7b6bfa"></span><div><div class="si-label">Claude Code</div><div class="si-sub">AI scoring engine</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#10a37f"></span><div><div class="si-label">OpenAI Codex</div><div class="si-sub">Alt AI engine</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#2196f3"></span><div><div class="si-label">Telegram Bot</div><div class="si-sub">Optional alerts</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#ff6b35"></span><div><div class="si-label">Vanilla JS</div><div class="si-sub">Zero-dependency UI</div></div></div>
   </div>
-</section>
+</div>
+</div>
 
-<!-- CTA -->
-<section class="cta">
-  <div class="cta-box">
-    <h2>Ready to scan memes?</h2>
-    <p>Clone the repo, add your Clawby API key, and run <code>./run.sh</code> — the venv installs itself automatically.</p>
-    <div class="hero-btns" style="justify-content:center">
-      <a class="btn-primary" href="https://github.com/mangacreatorstudio/monhood" target="_blank">Clone on GitHub</a>
-      <a class="btn-secondary" href="https://www.openclawby.com/" target="_blank">Get Clawby Key →</a>
+<!-- ② TOP 100 -->
+<div class="view" id="view-w2">
+<div class="panel">
+  <div class="phead">
+    <span class="t">② Top 100 meme · by 24h volume</span>
+    <span class="pill run"><span class="dot"></span> live</span>
+    <span class="grow"></span>
+    <span class="meta">updated 12s ago</span>
+  </div>
+  <div class="pbody">
+  <table>
+    <thead><tr>
+      <th class="l">Platform</th><th class="l">Token</th><th class="l mono">CA</th>
+      <th>Price</th><th>Mcap</th><th>24h Vol</th><th>Holders</th>
+      <th>Txns</th><th>Liquidity</th><th>Pool ETH</th><th>X buzz</th><th></th>
+    </tr></thead>
+    <tbody id="body-w2"></tbody>
+  </table>
+  </div>
+</div>
+</div>
+
+<!-- ④ ≤3 DAYS -->
+<div class="view" id="view-w4">
+<div class="panel">
+  <div class="phead">
+    <span class="t">④ New ≤3 days · Top 100 by volume</span>
+    <span class="pill run"><span class="dot"></span> scanning</span>
+    <span class="grow"></span>
+    <span class="meta">on-chain age verified</span>
+  </div>
+  <div class="pbody">
+  <table>
+    <thead><tr>
+      <th class="l">Platform</th><th class="l">Token</th><th class="l mono">CA</th>
+      <th>Created</th><th>Price</th><th>Mcap</th><th>24h Vol</th>
+      <th>Holders</th><th>Txns</th><th>Liquidity</th><th>Pool ETH</th><th>X buzz</th><th></th>
+    </tr></thead>
+    <tbody id="body-w4"></tbody>
+  </table>
+  </div>
+</div>
+</div>
+
+<!-- ⑤ AI · ROBINHOOD -->
+<div class="view" id="view-w5">
+<div class="panel">
+  <div class="phead">
+    <span class="t">⑤ AI Score · <span class="badge badge-rh">Robinhood</span></span>
+    <span class="pill run"><span class="dot"></span> scoring</span>
+    <span class="grow"></span>
+    <span class="meta">$100K–$5M mcap · ≤7d</span>
+    <button class="ghost sm" style="margin-left:8px">⏸ pause</button>
+  </div>
+  <div class="prog" id="prog-w5">
+    <div class="track"><div class="fill" id="fill-w5" style="width:62%"></div></div>
+    <span class="lbl" id="lbl-w5">scoring <b>PEPEVAULT</b> · 8/13</span>
+  </div>
+  <div class="pbody">
+  <table>
+    <thead><tr>
+      <th class="l">Token</th><th class="l mono">CA</th>
+      <th>Score</th><th class="wrap l">Rationale</th>
+      <th>Mcap</th><th>24h Vol</th><th>Holders</th><th>Txns 24h</th>
+      <th>KOL/Smart$</th><th>Scored</th><th></th>
+    </tr></thead>
+    <tbody id="body-w5"></tbody>
+  </table>
+  </div>
+</div>
+</div>
+
+<!-- ⑥ AI · BSC -->
+<div class="view" id="view-w6">
+<div class="panel">
+  <div class="phead">
+    <span class="t">⑥ AI Score · <span class="badge badge-bsc">BSC</span></span>
+    <span class="pill run"><span class="dot"></span> scoring</span>
+    <span class="grow"></span>
+    <span class="meta">$50K–$3M mcap · ≤5d</span>
+    <button class="ghost sm" style="margin-left:8px">⏸ pause</button>
+  </div>
+  <div class="prog" id="prog-w6">
+    <div class="track"><div class="fill" id="fill-w6" style="width:35%"></div></div>
+    <span class="lbl" id="lbl-w6">scoring <b>DOGE2049</b> · 4/11</span>
+  </div>
+  <div class="pbody">
+  <table>
+    <thead><tr>
+      <th class="l">Token</th><th class="l mono">CA</th>
+      <th>Score</th><th class="wrap l">Rationale</th>
+      <th>Mcap</th><th>24h Vol</th><th>Holders</th><th>Txns 24h</th>
+      <th>KOL/Smart$</th><th>Scored</th><th></th>
+    </tr></thead>
+    <tbody id="body-w6"></tbody>
+  </table>
+  </div>
+</div>
+</div>
+
+<!-- ⑦ AI · BASE -->
+<div class="view" id="view-w7">
+<div class="panel">
+  <div class="phead">
+    <span class="t">⑦ AI Score · <span class="badge badge-base">Base</span></span>
+    <span class="pill idle">idle</span>
+    <span class="grow"></span>
+    <span class="meta">$80K–$4M mcap · ≤3d</span>
+    <button class="ghost sm" style="margin-left:8px">▶ resume</button>
+  </div>
+  <div class="prog" id="prog-w7">
+    <div class="track"><div class="fill" id="fill-w7" style="width:100%"></div></div>
+    <span class="lbl" id="lbl-w7" style="color:var(--green)">✓ cycle done · next in 8m 14s</span>
+  </div>
+  <div class="pbody">
+  <table>
+    <thead><tr>
+      <th class="l">Token</th><th class="l mono">CA</th>
+      <th>Score</th><th class="wrap l">Rationale</th>
+      <th>Mcap</th><th>24h Vol</th><th>Holders</th><th>Txns 24h</th>
+      <th>KOL/Smart$</th><th>Scored</th><th></th>
+    </tr></thead>
+    <tbody id="body-w7"></tbody>
+  </table>
+  </div>
+</div>
+</div>
+
+<!-- ⑧ DEEP REPORT -->
+<div class="view" id="view-w8">
+<div class="panel" style="max-width:820px">
+  <div class="phead"><span class="t">⑧ Custom Deep Report</span></div>
+  <div class="rep-box">
+    <p>Pick a chain + paste a contract address → Clawby gathers all RPC / holder / trade / holder-relationship / X data → generates a full <b>illustrated PDF</b> with a price line chart, volume bars, holder-distribution doughnut, timeline and total tx count.</p>
+    <div class="in-row">
+      <select class="in" id="rep-chain">
+        <option value="robinhood">🦬 Robinhood</option>
+        <option value="bsc">🟡 BSC</option>
+        <option value="base">🔵 Base</option>
+      </select>
+      <input class="in" id="rep-ca" placeholder="0x… contract address" style="width:360px">
+      <button class="btn-gen" id="w8-btn" onclick="fakeReport()">🔬 Generate Report</button>
+    </div>
+    <div class="rep-status-box" id="rep-status"></div>
+    <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+      <div style="color:var(--dim);font-size:12px;margin-bottom:10px">Recent reports (demo)</div>
+      <table style="width:auto">
+        <thead><tr><th class="l">Token</th><th class="l">Chain</th><th>Mcap</th><th>Generated</th><th></th></tr></thead>
+        <tbody>
+          <tr><td class="l"><span class="sym">HOODIE</span></td><td class="l"><span class="badge badge-rh">RH</span></td><td>$2.1M</td><td class="dim2">4m ago</td><td><a href="#" onclick="return false">📄 PDF</a></td></tr>
+          <tr><td class="l"><span class="sym">WIFHAT</span></td><td class="l"><span class="badge badge-bsc">BSC</span></td><td>$890K</td><td class="dim2">22m ago</td><td><a href="#" onclick="return false">📄 PDF</a></td></tr>
+          <tr><td class="l"><span class="sym">BASEDCAT</span></td><td class="l"><span class="badge badge-base">Base</span></td><td>$1.4M</td><td class="dim2">1h ago</td><td><a href="#" onclick="return false">📄 PDF</a></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
-</section>
+</div>
+</div>
 
-<!-- FOOTER -->
-<footer>
-  <div>© 2025 Monhood · Fork of <a href="https://github.com/openclawby/Robinhood_Memescan" target="_blank">Robinhood_Memescan</a></div>
-  <div style="display:flex;gap:20px">
-    <a href="https://github.com/mangacreatorstudio/monhood" target="_blank">GitHub</a>
-    <a href="https://www.openclawby.com/" target="_blank">Clawby</a>
-    <a href="https://robinhoodchain.blockscout.com" target="_blank">Explorer</a>
-  </div>
-</footer>
+<div id="toast"></div>
 
+<script>
+// ──────────────────────── helpers ────────────────────────
+const rnd=(a,b)=>Math.random()*(b-a)+a;
+const ri=(a,b)=>Math.floor(rnd(a,b));
+function usd(n){if(!n&&n!==0)return'<span style="color:#39414f">—</span>';n=+n;const a=Math.abs(n);
+  if(a>=1e9)return'$'+(n/1e9).toFixed(2)+'B';if(a>=1e6)return'$'+(n/1e6).toFixed(2)+'M';
+  if(a>=1e3)return'$'+(n/1e3).toFixed(1)+'K';return'$'+n.toFixed(n<1?(n<0.01?6:4):2);}
+function num(n){return n==null?'<span style="color:#39414f">—</span>':(+n).toLocaleString();}
+function short(a){return a?a.slice(0,6)+'…'+a.slice(-4):'';}
+function addr(a,chain){const exp=chain==='bsc'?'https://bscscan.com/token/':chain==='base'?'https://basescan.org/token/':'https://robinhoodchain.blockscout.com/token/';return`<a href="${exp}${a}" target="_blank" title="${a}">${short(a)}</a><button class="cp" onclick="cp('${a}',this)" title="copy">⧉</button>`;}
+function ago(s){if(s<60)return Math.floor(s)+'s';if(s<3600)return Math.floor(s/60)+'m';return Math.floor(s/3600)+'h';}
+function cp(t,btn){try{navigator.clipboard.writeText(t).catch(()=>{});}catch(e){}
+  const o=btn.textContent;btn.textContent='✓';btn.style.color='var(--green)';
+  setTimeout(()=>{btn.textContent=o;btn.style.color='';},1200);toast('✓ copied '+short(t));}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.style.display='block';clearTimeout(el._t);el._t=setTimeout(()=>{el.style.display='none';},2000);}
+function scoreColor(s){if(s>=80)return'var(--green)';if(s>=60)return'var(--accent)';if(s>=40)return'var(--amber)';return'var(--red)';}
+function scoreBar(s){const c=scoreColor(s);return`<span class="score-bar" style="background:${c};width:${s*0.36}px"></span>`;}
+
+// ──────────────────────── data ────────────────────────
+const PLAT_COLORS={'Hood.fun':'#f7931a','Clawby':'#4a9eff','PumpRH':'#3fb950','LaunchRH':'#db61a2','BSCPump':'#f0b90b','PancakeSwap':'#f0b90b','BaseSwap':'#0052ff','Uniswap Base':'#ff007a'};
+function platCell(p){const c=PLAT_COLORS[p]||'#8b95a5';return`<span class="plat"><span class="plat-dot" style="background:${c}"></span>${p}</span>`;}
+function coinCircle(sym,color){return`<span class="coin-circle" style="background:${color}22;color:${color}">${sym.slice(0,2)}</span>`;}
+
+const SYM_COLORS={'#f7931a':['HOODIE','RHPEPE','DOGHOOD','MOONRH','HOODCAT','WIFHOOD','RHBULL','RHBEAR','PEPEVAULT','HOODMEME','RHSOL','RHFROG'],
+'#3fb950':['GREENRH','HOODBULL','PUMPRH','FRESHCOIN'],'#4a9eff':['BLUEMOON','WAVECAT','SKYHOOD'],'#db61a2':['PINKCAT','ROSEMEME','GIRLDOGE'],'#f85149':['REDFLAG','BURNCOIN']};
+const BSC_SYMS=['DOGE2049','PEPE2025','MOONCAT','BNBGIRL','SAFESHIB','BULLRUN','FLOKIBSC','CORGIBSC','BABYHOOD','SHIBKING'];
+const BASE_SYMS=['BASEDCAT','CBPEPE','BASEPEPE','BLUECAT','COINBASE2','NORMIE','BALD2','TOSHI2','BRETT2','KUMA'];
+const PLATS_RH=['Hood.fun','Hood.fun','Hood.fun','Clawby','PumpRH','LaunchRH'];
+const PLATS_BSC=['BSCPump','PancakeSwap','PancakeSwap','BSCPump'];
+const PLATS_BASE=['BaseSwap','Uniswap Base','BaseSwap','Uniswap Base'];
+
+function randCA(){return'0x'+Array.from({length:40},()=>'0123456789abcdef'[ri(0,16)]).join('');}
+function randAddr(){return'0x'+Array.from({length:40},()=>'0123456789abcdef'[ri(0,16)]).join('');}
+
+function makeToken(sym,platform,chain){
+  const allColors=Object.keys(SYM_COLORS);
+  let color='#f7931a';
+  for(const[c,arr]of Object.entries(SYM_COLORS)){if(arr.includes(sym)){color=c;break;}}
+  const mcap=ri(80000,8000000);
+  return{sym,name:sym.toLowerCase()+'.rh',ca:randCA(),creator:randAddr(),platform,chain,color,
+    created_ago:ri(60,259200),mcap,price:rnd(0.000001,0.12),volume24:mcap*rnd(0.08,0.6),
+    holders:ri(120,4200),transfers:ri(300,18000),liquidity:mcap*rnd(0.03,0.15),
+    eth_in_pools:rnd(0.5,42),x_ca:ri(0,180),
+    tx_rh:ri(0,2200),tx_eth:ri(0,80),tx_bsc:ri(0,45),tx_base:ri(0,30),tx_hev:ri(0,15),
+    creator_is_kol:Math.random()<0.18,creator_twitter:Math.random()<0.4?'kol_'+sym.toLowerCase():null,
+    score:null,rationale:null,scoring:false,scored_at:null};
+}
+
+// build token pools
+function buildRH(){return SYM_COLORS['#f7931a'].concat(SYM_COLORS['#3fb950'],SYM_COLORS['#4a9eff'],SYM_COLORS['#db61a2'],SYM_COLORS['#f85149']).map(s=>makeToken(s,PLATS_RH[ri(0,PLATS_RH.length)],'robinhood'));}
+function buildBSC(){return BSC_SYMS.map(s=>makeToken(s,PLATS_BSC[ri(0,PLATS_BSC.length)],'bsc'));}
+function buildBase(){return BASE_SYMS.map(s=>makeToken(s,PLATS_BASE[ri(0,PLATS_BASE.length)],'base'));}
+
+const RH_TOKENS=buildRH();
+const BSC_TOKENS=buildBSC();
+const BASE_TOKENS=buildBase();
+
+const RATIONALES={
+  high:["Strong early buy signal: creator has 1,200+ Robinhood txs with 2 prior successful launches. Top-10 holder concentration under 28%. 847 24h txns with rising volume. X mentions up 340% in 4h window.",
+    "Exceptional on-chain profile. Deployer is a verified KOL (Ξ active across 3 chains). Holder distribution clean — no single wallet above 6%. Liquidity locked 90 days. Volume/mcap ratio 0.41.",
+    "High conviction: 3 smart-money wallets entered within 30 blocks of deploy. Pool ETH reserves 12.4 Ξ. Creator has 2,100 rh txs, 0 rugs. Holders growing +18% per hour at time of scan."],
+  mid:["Moderate signal. Fair holder spread (top-10 = 34%), decent volume but creator wallet thin history (only 42 rh txs). X engagement sparse — 12 mentions. Watch for volume confirmation.",
+    "Mixed profile. Volume/mcap ratio healthy at 0.29 but top-3 holders control 31%. No KOL detected. 2 smart-money touches. Proceed with caution; wait for second hour candle.",
+    "Neutral-to-slight-positive. Liquidity adequate, creator not flagged. Price action erratic — 3 large sells in last 45 min. X buzz minimal. Score reflects uncertainty."],
+  low:["Weak signal. Creator wallet 8 total txs across all chains — likely fresh. Top holder = 19% single wallet (red flag). Volume spike appears bot-driven (uniform tx sizes). X = 0 mentions.",
+    "Avoid. Deployer previously associated with 2 honeypots on ETH. Holder count stagnant. Sells outpacing buys 2.3:1. Liquidity thin (<1 Ξ). Score penalized heavily for creator risk.",
+    "Low conviction. No smart money, no KOL, thin liquidity. Created <2h ago — insufficient data for reliable score. Revisit after 500+ holder milestone."]
+};
+function pickRationale(score){if(score>=75)return RATIONALES.high[ri(0,3)];if(score>=45)return RATIONALES.mid[ri(0,3)];return RATIONALES.low[ri(0,3)];}
+
+// assign scores to existing tokens
+[...RH_TOKENS,...BSC_TOKENS,...BASE_TOKENS].forEach((t,i)=>{
+  if(i<RH_TOKENS.length-2){// leave last 2 RH "being scored"
+    t.score=ri(22,96);t.rationale=pickRationale(t.score);t.scored_at=Date.now()/1000-ri(60,5400);}
+});
+// mark one as currently scoring
+RH_TOKENS[RH_TOKENS.length-2].scoring=true;
+BSC_TOKENS[BSC_TOKENS.length-1].scoring=true;
+
+// ──────────────────────── render ────────────────────────
+function renderW1(){
+  const rows=RH_TOKENS.slice().sort((a,b)=>a.created_ago-b.created_ago);
+  document.getElementById('body-w1').innerHTML=rows.map(t=>`<tr>
+    <td class="l">${platCell(t.platform)}</td>
+    <td class="l">${coinCircle(t.sym,t.color)}<span class="sym">${t.sym}</span> <span class="nm">${t.name}</span></td>
+    <td class="l mono">${addr(t.ca,'robinhood')}</td>
+    <td>${ago(t.created_ago)} ago</td>
+    <td class="l mono">${addr(t.creator,'robinhood')}</td>
+    <td class="l ${t.creator_is_kol?'kol-yes':''}">${t.creator_is_kol?`✓KOL${t.creator_twitter?` <a href="https://x.com/${t.creator_twitter}" target="_blank">@${t.creator_twitter}</a>`:''}` :'<span class="dim2">—</span>'}</td>
+    <td>${t.tx_rh>0?`<span class="pos">${t.tx_rh.toLocaleString()}</span>`:'<span class="dim2">0</span>'}</td>
+    <td>${t.tx_eth||'<span class="dim2">—</span>'}</td>
+    <td>${t.tx_bsc||'<span class="dim2">—</span>'}</td>
+    <td>${t.tx_base||'<span class="dim2">—</span>'}</td>
+    <td>${t.tx_hev||'<span class="dim2">—</span>'}</td>
+    <td><button class="mini" title="watchlist" onclick="toast('★ added to watchlist')">★</button></td>
+  </tr>`).join('');
+}
+
+function renderW2(){
+  const rows=[...RH_TOKENS].sort((a,b)=>b.volume24-a.volume24);
+  document.getElementById('body-w2').innerHTML=rows.map(t=>`<tr>
+    <td class="l">${platCell(t.platform)}</td>
+    <td class="l">${coinCircle(t.sym,t.color)}<span class="sym">${t.sym}</span> <span class="nm">${t.name}</span></td>
+    <td class="l mono">${addr(t.ca,'robinhood')}</td>
+    <td>${usd(t.price)}</td><td>${usd(t.mcap)}</td><td>${usd(t.volume24)}</td>
+    <td>${num(t.holders)}</td><td>${num(t.transfers)}</td><td>${usd(t.liquidity)}</td>
+    <td>${t.eth_in_pools.toFixed(1)} Ξ</td>
+    <td>${t.x_ca>=100?'<b class="pos">≥100</b>':(t.x_ca>0?t.x_ca:'<span class="dim2">0</span>')}</td>
+    <td><button class="mini" onclick="toast('★ added to watchlist')">★</button></td>
+  </tr>`).join('');
+}
+
+function renderW4(){
+  const rows=[...RH_TOKENS].filter(t=>t.created_ago<259200).sort((a,b)=>b.volume24-a.volume24);
+  document.getElementById('body-w4').innerHTML=rows.map(t=>`<tr>
+    <td class="l">${platCell(t.platform)}</td>
+    <td class="l">${coinCircle(t.sym,t.color)}<span class="sym">${t.sym}</span> <span class="nm">${t.name}</span></td>
+    <td class="l mono">${addr(t.ca,'robinhood')}</td>
+    <td>${ago(t.created_ago)} ago</td>
+    <td>${usd(t.price)}</td><td>${usd(t.mcap)}</td><td>${usd(t.volume24)}</td>
+    <td>${num(t.holders)}</td><td>${num(t.transfers)}</td><td>${usd(t.liquidity)}</td>
+    <td>${t.eth_in_pools.toFixed(1)} Ξ</td>
+    <td>${t.x_ca>=100?'<b class="pos">≥100</b>':(t.x_ca>0?t.x_ca:'<span class="dim2">0</span>')}</td>
+    <td><button class="mini" onclick="toast('★ added to watchlist')">★</button></td>
+  </tr>`).join('');
+}
+
+function scoreRow(t){
+  if(t.scoring)return`<tr class="scoring-row">
+    <td class="l">${coinCircle(t.sym,t.color)}<span class="sym">${t.sym}</span> <span class="nm">${t.name}</span></td>
+    <td class="l mono">${addr(t.ca,t.chain)}</td>
+    <td><span class="dim2">…</span></td>
+    <td class="wrap"><span class="rationale dim2">gathering data…</span></td>
+    <td colspan="7"></td>
+  </tr>`;
+  if(!t.score)return`<tr>
+    <td class="l">${coinCircle(t.sym,t.color)}<span class="sym">${t.sym}</span></td>
+    <td class="l mono">${addr(t.ca,t.chain)}</td>
+    <td><span class="dim2">pending</span></td>
+    <td colspan="8"></td>
+  </tr>`;
+  const sc=t.score;const c=scoreColor(sc);
+  return`<tr>
+    <td class="l">${coinCircle(t.sym,t.color)}<span class="sym">${t.sym}</span> <span class="nm">${t.name}</span></td>
+    <td class="l mono">${addr(t.ca,t.chain)}</td>
+    <td><span class="score" style="color:${c}">${sc}</span>${scoreBar(sc)}</td>
+    <td class="wrap"><span class="rationale">${t.rationale}</span></td>
+    <td>${usd(t.mcap)}</td><td>${usd(t.volume24)}</td><td>${num(t.holders)}</td><td>${num(t.transfers)}</td>
+    <td>${t.creator_is_kol?'<span class="pos">1 KOL</span>':'<span class="dim2">—</span>'} / <span class="${t.tx_rh>500?'pos':'dim2'}">${ri(0,3)} smart$</span></td>
+    <td class="dim2">${ago(Date.now()/1000-t.scored_at)} ago</td>
+    <td><button class="mini" onclick="toast('★ added to watchlist')">★</button></td>
+  </tr>`;
+}
+
+function renderScorer(pool,bodyId){
+  const sorted=[...pool].filter(t=>t.score!=null||t.scoring).sort((a,b)=>(b.score||0)-(a.score||0));
+  document.getElementById(bodyId).innerHTML=sorted.map(scoreRow).join('');
+}
+
+function renderAll(){
+  renderW1();renderW2();renderW4();
+  renderScorer(RH_TOKENS,'body-w5');
+  renderScorer(BSC_TOKENS,'body-w6');
+  renderScorer(BASE_TOKENS,'body-w7');
+}
+
+// ──────────────────────── tab switching ────────────────────────
+function tab(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('view-'+id).classList.add('active');
+  btn.classList.add('on');
+}
+
+// ──────────────────────── fake live updates ────────────────────────
+let scoringIdx={w5:RH_TOKENS.findIndex(t=>t.scoring), w6:BSC_TOKENS.findIndex(t=>t.scoring)};
+let fillPct={w5:62,w6:35};
+let fillDir={w5:1,w6:1};
+
+function tickScoring(){
+  // animate progress bars
+  for(const w of['w5','w6']){
+    fillPct[w]+=rnd(0.5,2.5)*fillDir[w];
+    if(fillPct[w]>100){fillPct[w]=100;fillDir[w]=-1;}
+    if(fillPct[w]<5){fillPct[w]=5;fillDir[w]=1;
+      // finish scoring current token
+      const pool=w==='w5'?RH_TOKENS:BSC_TOKENS;
+      const idx=scoringIdx[w];
+      if(idx>=0&&idx<pool.length){
+        pool[idx].scoring=false;pool[idx].score=ri(30,95);
+        pool[idx].rationale=pickRationale(pool[idx].score);
+        pool[idx].scored_at=Date.now()/1000;
+        // start next
+        const next=(idx+1)%pool.length;
+        pool[next].scoring=true;scoringIdx[w]=next;
+        const lbl=document.getElementById('lbl-'+w);
+        if(lbl)lbl.innerHTML=`scoring <b>${pool[next].sym}</b> · ${next+1}/${pool.length}`;
+      }
+    }
+    const fill=document.getElementById('fill-'+w);
+    if(fill)fill.style.width=fillPct[w]+'%';
+  }
+  // occasionally jitter top-100 volumes & holders
+  if(Math.random()<0.3){
+    RH_TOKENS.forEach(t=>{t.volume24*=rnd(0.995,1.005);t.holders+=ri(-2,4);t.holders=Math.max(10,t.holders);t.transfers+=ri(0,8);});
+  }
+  // update header counters
+  document.getElementById('s-api').textContent=(+document.getElementById('s-api').textContent.replace(/,/g,'')+ri(1,6)).toLocaleString();
+  document.getElementById('s-block').textContent=(+document.getElementById('s-block').textContent.replace(/,/g,'')+ri(0,2)).toLocaleString();
+  // re-render active panel
+  const activeView=document.querySelector('.view.active');
+  if(activeView){
+    const id=activeView.id.replace('view-','');
+    if(id==='w1')renderW1();
+    else if(id==='w2')renderW2();
+    else if(id==='w4')renderW4();
+    else if(id==='w5')renderScorer(RH_TOKENS,'body-w5');
+    else if(id==='w6')renderScorer(BSC_TOKENS,'body-w6');
+    else if(id==='w7')renderScorer(BASE_TOKENS,'body-w7');
+  }
+}
+
+// occasionally add new launch to w1
+function addNewLaunch(){
+  const extras=['NEWHOOD','FRESHCAT','ALPHARH','GMGN','MOONSHOT2','EARLYBIRD'];
+  const sym=extras[ri(0,extras.length)]+(ri(10,99));
+  const t=makeToken(sym,PLATS_RH[ri(0,PLATS_RH.length)],'robinhood');
+  RH_TOKENS.unshift(t);if(RH_TOKENS.length>20)RH_TOKENS.pop();
+  document.getElementById('ph-w1').textContent=(+document.getElementById('ph-w1').textContent.split(' ')[0]+1)+' new today';
+  toast('🆕 new token: '+sym);
+}
+
+// ──────────────────────── report demo ────────────────────────
+function fakeReport(){
+  const ca=document.getElementById('rep-ca').value.trim();
+  const chain=document.getElementById('rep-chain').value;
+  if(!ca.match(/^0x[0-9a-fA-F]{40}$/)){
+    document.getElementById('rep-status').innerHTML='<span style="color:var(--red)">⚠ enter a valid contract address (0x… 40 hex)</span>';return;}
+  const st=document.getElementById('rep-status');
+  const btn=document.getElementById('w8-btn');
+  btn.disabled=true;
+  st.innerHTML='<span class="dim">⏳ started — gathering on-chain + X data… (~3–8 min on real instance)</span>';
+  let p=0;
+  const iv=setInterval(()=>{p+=ri(2,8);if(p>100)p=100;
+    const phases=['gathering RPC logs…','fetching holders…','pulling X mentions…','building wiki…','scoring with AI…','rendering PDF…'];
+    const phase=phases[Math.min(Math.floor(p/17),5)];
+    st.innerHTML=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+      <div class="track" style="width:280px"><div class="fill" style="width:${p}%"></div></div>
+      <span class="dim">${p}%</span></div>
+      <span class="dim">${phase}</span>`;
+    if(p>=100){clearInterval(iv);btn.disabled=false;
+      st.innerHTML=`<a class="bigbtn" href="#" onclick="return false">📄 Open PDF Report</a> <button class="ghost sm" style="margin-left:8px" onclick="fakeReport()">🔄 Regenerate</button><br><span class="dim" style="font-size:11px">demo — PDF would render with real Clawby data on a live instance</span>`;}
+  },400);
+}
+
+// ──────────────────────── init ────────────────────────
+renderAll();
+setInterval(tickScoring,2000);
+setInterval(addNewLaunch,18000);
+</script>
 </body>
 </html>
