@@ -398,8 +398,8 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <section id="about">
 <div class="hero">
   <div class="hero-badge">🦬 Robinhood Chain · BSC · Base</div>
-  <h2>The Meme Coin Intelligence<br>Layer for <em>Serious Traders</em></h2>
-  <p>Live scanner across 3 chains. AI scores every token 1–100 with a written rationale, refreshed every 10 minutes. Self-hosted, no subscription.</p>
+  <h2>Catch every launch.<br><em>Score it before it moves.</em></h2>
+  <p>Watches Robinhood Chain, BSC, and Base around the clock. New tokens get a 1–100 score and a short written reason — refreshed every 10 minutes, running on your own machine.</p>
   <div class="hero-stats">
     <div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">Live Windows</span></div>
     <div class="hstat-sep"></div>
@@ -438,17 +438,17 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <!-- ── DEMO ────────────────────────────── -->
 <section id="demo">
 <div style="max-width:1200px;margin:0 auto;padding:32px 16px 0;">
-  <div class="sec-label" style="text-align:center;margin-bottom:12px;">Interactive Preview</div>
+  <div class="sec-label" style="text-align:center;margin-bottom:12px;">Try It Yourself</div>
   <div style="text-align:center;margin-bottom:16px;">
-    <span style="font-size:1.3rem;font-weight:800;letter-spacing:-.3px;">Identical UI to the self-hosted app</span><br>
-    <span style="color:var(--dim);font-size:13px;">Simulated data · explore all eight windows · watch AI scoring progress in real time</span>
+    <span style="font-size:1.3rem;font-weight:800;letter-spacing:-.3px;">Same UI as the self-hosted app</span><br>
+    <span style="color:var(--dim);font-size:13px;">Simulated data. All eight windows are open — click around.</span>
   </div>
 </div>
 
 <!-- demo banner -->
 <div style="max-width:1200px;margin:0 auto 0;padding:0 16px;">
 <div class="demo-banner" style="border-radius:var(--radius) var(--radius) 0 0;border:1px solid #1e3150;border-bottom:none;">
-  <span>Simulated data · production use requires Python 3.9</span>
+  <span>Simulated data — production needs Python 3.9 on your own server</span>
   <a href="#requirements">Get the source on GitHub</a>
 </div>
 </div>
@@ -564,7 +564,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   <div class="panel" style="border-radius:0;border:none;max-width:780px">
     <div class="phead"><span class="t">⑧ Custom Deep Report</span></div>
     <div class="rep-box">
-      <p>Pick a chain, paste a contract address, and the engine gathers on-chain data, holder relationships, trading history, and X activity to generate a full <b>illustrated PDF</b> with a price chart, volume bars, holder distribution, and transaction timeline.</p>
+      <p>Paste a contract address, pick a chain. The engine pulls holder data, trade history, and X posts and writes a full <b>illustrated PDF</b> with a price chart, volume bars, holder breakdown, and transaction timeline. Usually 3–8 minutes.</p>
       <div class="in-row">
         <select class="in" id="rep-chain"><option value="robinhood">🦬 Robinhood</option><option value="bsc">🟡 BSC</option><option value="base">🔵 Base</option></select>
         <input class="in" id="rep-ca" placeholder="0x… contract address" style="width:320px">
@@ -591,21 +591,21 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <!-- ── WINDOWS TABLE ──────────────────── -->
 <section id="windows">
 <div class="sec-inner narrow">
-  <div class="sec-label">What You Get</div>
-  <div class="sec-title">Eight Monitoring Windows</div>
+  <div class="sec-label">What's Inside</div>
+  <div class="sec-title">One dashboard. Eight jobs.</div>
   <div class="panel">
   <table class="win-table">
     <thead><tr><th>Window</th><th>Name</th><th>Description</th></tr></thead>
     <tbody>
-      <tr><td><span class="win-id">①</span></td><td class="win-name">New Launches</td><td class="win-desc">Ingests factory events as they land on-chain. Each new token shows creator KOL status, transaction counts, and early volume signals. <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-all">+4</span></td></tr>
-      <tr><td><span class="win-id">②</span></td><td class="win-name">Top 100</td><td class="win-desc">The 100 highest-volume tokens on Robinhood Chain ranked by 24 h volume, with full market data and X activity. <span class="chain-pill cp-rh">RH</span></td></tr>
-      <tr><td><span class="win-id">③</span></td><td class="win-name">Watchlist</td><td class="win-desc">Saved tokens with configurable per-address refresh intervals, KOL and smart-money counts, and one-click deep analysis. <span class="chain-pill cp-all">all chains</span></td></tr>
-      <tr><td><span class="win-id">④</span></td><td class="win-name">New ≤3 Days</td><td class="win-desc">Filters to tokens whose on-chain creation timestamp is within the last 72 hours. Excludes relaunched or migrated contracts that would inflate the age. <span class="chain-pill cp-rh">RH</span></td></tr>
-      <tr><td><span class="win-id">⑤</span></td><td class="win-name">AI · Robinhood</td><td class="win-desc">Automated scoring cycle runs every 10 minutes across your configured market-cap band. Pulls on-chain data, holder distribution, trading activity, and social signals, then outputs a 1 to 100 score with written rationale. <span class="chain-pill cp-rh">RH</span></td></tr>
-      <tr><td><span class="win-id">⑥</span></td><td class="win-name">AI · BSC</td><td class="win-desc">Identical scoring engine to Window 5, running independently on BSC. Market-cap band and token-age cutoff are configured separately. <span class="chain-pill cp-bsc">BSC</span></td></tr>
-      <tr><td><span class="win-id">⑦</span></td><td class="win-name">AI · Base</td><td class="win-desc">Identical scoring engine to Window 5, running independently on Base. Market-cap band and token-age cutoff are configured separately. <span class="chain-pill cp-base">Base</span></td></tr>
-      <tr><td><span class="win-id">⑧</span></td><td class="win-name">Deep Report</td><td class="win-desc">Select a chain, paste a contract address, and the engine pulls all on-chain, holder, trade, and X data to produce an illustrated PDF report with charts. Takes 3 to 8 minutes. <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-bsc">BSC</span><span class="chain-pill cp-base">Base</span></td></tr>
-      <tr><td><span class="win-id">⚙️</span></td><td class="win-name">Admin</td><td class="win-desc">Central control panel for the entire backend: concurrency limit, AI engine selection, per-window refresh interval, per-scorer market-cap bands and age filters, data field toggles to reduce API quota usage, Telegram alert routing, and live runtime status.</td></tr>
+      <tr><td><span class="win-id">①</span></td><td class="win-name">New Launches</td><td class="win-desc">Every token that just deployed, as it hits the chain. Shows the creator's KOL history, early tx count, and cross-chain activity so you can judge it in the first few minutes. <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-all">+4</span></td></tr>
+      <tr><td><span class="win-id">②</span></td><td class="win-name">Top 100</td><td class="win-desc">Top 100 by 24h volume on Robinhood Chain. Full market data, X activity, and a direct link to the chart. <span class="chain-pill cp-rh">RH</span></td></tr>
+      <tr><td><span class="win-id">③</span></td><td class="win-name">Watchlist</td><td class="win-desc">Tokens you're tracking. Set your own refresh rate per address, watch KOL and smart money flow in, and kick off a deep report any time. <span class="chain-pill cp-all">all chains</span></td></tr>
+      <tr><td><span class="win-id">④</span></td><td class="win-name">New ≤3 Days</td><td class="win-desc">Top 100 filtered to tokens under 72 hours old. On-chain age is verified — migrated contracts don't sneak in and inflate the list. <span class="chain-pill cp-rh">RH</span></td></tr>
+      <tr><td><span class="win-id">⑤</span></td><td class="win-name">AI · Robinhood</td><td class="win-desc">Runs a scoring pass every 10 minutes. Pulls holder data, trade history, and X signals, then writes a 1–100 score with a plain-English reason for each token in your market-cap range. <span class="chain-pill cp-rh">RH</span></td></tr>
+      <tr><td><span class="win-id">⑥</span></td><td class="win-name">AI · BSC</td><td class="win-desc">Same scoring engine as ⑤, running independently on BSC. Its market-cap band and age cutoff are set separately. <span class="chain-pill cp-bsc">BSC</span></td></tr>
+      <tr><td><span class="win-id">⑦</span></td><td class="win-name">AI · Base</td><td class="win-desc">Same scoring engine as ⑤, running independently on Base. Its market-cap band and age cutoff are set separately. <span class="chain-pill cp-base">Base</span></td></tr>
+      <tr><td><span class="win-id">⑧</span></td><td class="win-name">Deep Report</td><td class="win-desc">Paste a contract address, pick a chain. It pulls holders, trades, and X posts and builds an illustrated PDF with a price chart, volume bars, and holder breakdown. Usually done in 3–8 minutes. <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-bsc">BSC</span><span class="chain-pill cp-base">Base</span></td></tr>
+      <tr><td><span class="win-id">⚙️</span></td><td class="win-name">Admin</td><td class="win-desc">One place to tune the whole backend: concurrency, AI model, refresh intervals per window, market-cap bands for each scorer, Telegram alert routing, and a live view of what's currently running.</td></tr>
     </tbody>
   </table>
   </div>
@@ -615,24 +615,24 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <!-- ── STACK ───────────────────────────── -->
 <section id="stack">
 <div class="sec-inner narrow">
-  <div class="sec-label">Under the Hood</div>
-  <div class="sec-title">Technology Stack</div>
+  <div class="sec-label">What It Runs On</div>
+  <div class="sec-title">The stack</div>
   <div class="stack-grid">
-    <div class="stack-item"><span class="stack-dot" style="background:var(--rh)"></span><div><div class="si-label">On-chain Data API</div><div class="si-sub">Token, holder and RPC layer</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span><div><div class="si-label">Python 3.9+</div><div class="si-sub">Runtime and server</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#009688"></span><div><div class="si-label">FastAPI</div><div class="si-sub">REST API framework</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#00d4aa"></span><div><div class="si-label">httpx</div><div class="si-sub">Non-blocking HTTP</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#7b6bfa"></span><div><div class="si-label">Claude Code</div><div class="si-sub">Primary AI engine</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#10a37f"></span><div><div class="si-label">OpenAI Codex</div><div class="si-sub">Alternative AI engine</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:#2196f3"></span><div><div class="si-label">Telegram Bot</div><div class="si-sub">Push notifications</div></div></div>
-    <div class="stack-item"><span class="stack-dot" style="background:var(--rh)"></span><div><div class="si-label">Vanilla JS</div><div class="si-sub">No build step required</div></div></div>
+    <div class="stack-item"><span class="stack-dot" style="background:var(--rh)"></span><div><div class="si-label">On-chain Data API</div><div class="si-sub">Prices, holders, trades, RPC</div></div></div>
+    <div class="stack-item"><span class="stack-dot" style="background:#3776ab"></span><div><div class="si-label">Python 3.9+</div><div class="si-sub">Runs locally or on any VPS</div></div></div>
+    <div class="stack-item"><span class="stack-dot" style="background:#009688"></span><div><div class="si-label">FastAPI</div><div class="si-sub">Serves the browser dashboard</div></div></div>
+    <div class="stack-item"><span class="stack-dot" style="background:#00d4aa"></span><div><div class="si-label">httpx</div><div class="si-sub">Async calls, no blocking</div></div></div>
+    <div class="stack-item"><span class="stack-dot" style="background:#7b6bfa"></span><div><div class="si-label">Claude Code</div><div class="si-sub">AI scoring, default</div></div></div>
+    <div class="stack-item"><span class="stack-dot" style="background:#10a37f"></span><div><div class="si-label">OpenAI Codex</div><div class="si-sub">AI scoring, fallback</div></div></div>
+    <div class="stack-item"><span class="stack-dot" style="background:#2196f3"></span><div><div class="si-label">Telegram Bot</div><div class="si-sub">Optional score alerts</div></div></div>
+    <div class="stack-item"><span class="stack-dot" style="background:var(--rh)"></span><div><div class="si-label">Vanilla JS</div><div class="si-sub">No framework, no build step</div></div></div>
   </div>
 </div>
 </section>
 
 <!-- ── FOOTER ─────────────────────────── -->
 <footer>
-  <div>© 2026 Monhood. Professional meme coin intelligence for Robinhood Chain, BSC, and Base.</div>
+  <div>© 2026 Monhood — built for Robinhood Chain, BSC, and Base.</div>
   <div class="flinks">
     <a href="/login.html">Dashboard</a>
     <a href="/privacy.html">Privacy</a>
