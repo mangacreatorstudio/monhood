@@ -89,7 +89,7 @@ pre code{background:none;border:none;padding:0;font-size:12px;}
 .logo-text{display:flex;flex-direction:column;gap:0;}
 .logo-name{font-size:14px;font-weight:800;letter-spacing:-.3px;line-height:1.15;color:var(--fg);}
 .logo-tag{font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;color:var(--dim);line-height:1.2;}
-.logo span{width:30px;height:30px;background:linear-gradient(135deg,#f7931a,#ff6b35);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 2px 10px rgba(247,147,26,.35);}
+.logo>span{width:30px;height:30px;background:linear-gradient(135deg,#f7931a,#ff6b35);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 2px 10px rgba(247,147,26,.35);}
 .navlinks{display:flex;gap:2px;flex:1;}
 .navlinks a{padding:6px 12px;border-radius:8px;color:var(--dim);font-size:13px;font-weight:500;transition:color .15s,background .15s;}
 .navlinks a:hover{color:var(--fg);background:rgba(255,255,255,.05);text-decoration:none;}
@@ -304,7 +304,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 /* ── Demo wrapper overflow ── */
 .demo-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 
-/* ══ MOBILE FIRST — base overrides ══ */
+/* ══ MOBILE FIRST - base overrides ══ */
 @media(max-width:639px){
   /* Nav */
   #topnav{padding:0 14px;gap:8px;height:52px;}
@@ -354,7 +354,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   .win-table th:nth-child(3),.win-table td:nth-child(3){display:none;} /* hide desc col, too wide */
   .win-name{white-space:normal;}
 
-  /* Stack grid — 2 col on mobile */
+  /* Stack grid - 2 col on mobile */
   .stack-grid{grid-template-columns:repeat(2,1fr);}
   .stack-item{padding:12px;}
 
@@ -363,7 +363,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   .flinks{flex-wrap:wrap;justify-content:center;gap:12px;}
 }
 
-/* ══ TABLET — 640-1023px ══ */
+/* ══ TABLET - 640-1023px ══ */
 @media(min-width:640px) and (max-width:1023px){
   .navlinks a{font-size:12px;padding:5px 8px;}
   .btn-launch{font-size:12px;padding:5px 13px;}
@@ -407,7 +407,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <div class="hero">
   <div class="hero-badge">🦬 Robinhood Chain · BSC · Base</div>
   <h2>Catch every launch.<br><em>Score it before it moves.</em></h2>
-  <p>Watches Robinhood Chain, BSC, and Base around the clock. New tokens get a 1–100 score and a short written reason, refreshed every 10 minutes, running on your own machine.</p>
+  <p>Watches Robinhood Chain, BSC, and Base around the clock. New tokens get a 1-100 score and a short written reason, refreshed every 10 minutes, running on your own machine.</p>
   <div class="hero-stats">
     <div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">Live Windows</span></div>
     <div class="hstat-sep"></div>
@@ -457,7 +457,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 <div style="max-width:1200px;margin:0 auto 0;padding:0 16px;">
 <div class="demo-banner" style="border-radius:var(--radius) var(--radius) 0 0;border:1px solid #1e3150;border-bottom:none;">
   <span>Simulated data. Production needs Python 3.9 on your own server.</span>
-  <a href="#requirements">Get the source on GitHub</a>
+  <a href="https://github.com/mangacreatorstudio/monhood" target="_blank">Get the source on GitHub</a>
 </div>
 </div>
 
@@ -528,7 +528,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   <!-- W5 -->
   <div class="sview" id="sv-w5">
   <div class="panel" style="border-radius:0;border:none;">
-    <div class="phead"><span class="t">⑤ AI Score · <span class="badge badge-rh">Robinhood</span></span><span class="pill run"><span class="dot"></span>scoring</span><span class="grow"></span><span class="meta">$100K–$5M · ≤7d</span><button class="ghost" style="margin-left:8px;font-size:11px">⏸ pause</button></div>
+    <div class="phead"><span class="t">⑤ AI Score · <span class="badge badge-rh">Robinhood</span></span><span class="pill run"><span class="dot"></span>scoring</span><span class="grow"></span><span class="meta">$100K-$5M · ≤7d</span><button class="ghost" style="margin-left:8px;font-size:11px">⏸ pause</button></div>
     <div class="prog"><div class="track"><div class="fill" id="fill-w5" style="width:62%"></div></div><span class="lbl" id="lbl-w5">scoring <b>PEPEVAULT</b> · 8/13</span></div>
     <div class="pbody" style="max-height:320px;overflow-y:auto;">
     <table><thead><tr>
@@ -542,7 +542,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   <!-- W6 -->
   <div class="sview" id="sv-w6">
   <div class="panel" style="border-radius:0;border:none;">
-    <div class="phead"><span class="t">⑥ AI Score · <span class="badge badge-bsc">BSC</span></span><span class="pill run"><span class="dot"></span>scoring</span><span class="grow"></span><span class="meta">$50K–$3M · ≤5d</span><button class="ghost" style="margin-left:8px;font-size:11px">⏸ pause</button></div>
+    <div class="phead"><span class="t">⑥ AI Score · <span class="badge badge-bsc">BSC</span></span><span class="pill run"><span class="dot"></span>scoring</span><span class="grow"></span><span class="meta">$50K-$3M · ≤5d</span><button class="ghost" style="margin-left:8px;font-size:11px">⏸ pause</button></div>
     <div class="prog"><div class="track"><div class="fill" id="fill-w6" style="width:35%"></div></div><span class="lbl" id="lbl-w6">scoring <b>DOGE2049</b> · 4/11</span></div>
     <div class="pbody" style="max-height:320px;overflow-y:auto;">
     <table><thead><tr>
@@ -556,7 +556,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   <!-- W7 -->
   <div class="sview" id="sv-w7">
   <div class="panel" style="border-radius:0;border:none;">
-    <div class="phead"><span class="t">⑦ AI Score · <span class="badge badge-base">Base</span></span><span class="pill idle">idle</span><span class="grow"></span><span class="meta">$80K–$4M · ≤3d</span><button class="ghost" style="margin-left:8px;font-size:11px">▶ resume</button></div>
+    <div class="phead"><span class="t">⑦ AI Score · <span class="badge badge-base">Base</span></span><span class="pill idle">idle</span><span class="grow"></span><span class="meta">$80K-$4M · ≤3d</span><button class="ghost" style="margin-left:8px;font-size:11px">▶ resume</button></div>
     <div class="prog"><div class="track"><div class="fill" id="fill-w7" style="width:100%"></div></div><span class="lbl" id="lbl-w7" style="color:var(--green)">✓ cycle done · next in 8m 14s</span></div>
     <div class="pbody" style="max-height:320px;overflow-y:auto;">
     <table><thead><tr>
@@ -572,7 +572,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   <div class="panel" style="border-radius:0;border:none;max-width:780px">
     <div class="phead"><span class="t">⑧ Custom Deep Report</span></div>
     <div class="rep-box">
-      <p>Paste a contract address, pick a chain. The engine pulls holder data, trade history, and X posts and writes a full <b>illustrated PDF</b> with a price chart, volume bars, holder breakdown, and transaction timeline. Usually 3–8 minutes.</p>
+      <p>Paste a contract address, pick a chain. The engine pulls holder data, trade history, and X posts and writes a full <b>illustrated PDF</b> with a price chart, volume bars, holder breakdown, and transaction timeline. Usually 3-8 minutes.</p>
       <div class="in-row">
         <select class="in" id="rep-chain"><option value="robinhood">🦬 Robinhood</option><option value="bsc">🟡 BSC</option><option value="base">🔵 Base</option></select>
         <input class="in" id="rep-ca" placeholder="0x… contract address" style="width:320px">
@@ -609,10 +609,10 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
       <tr><td><span class="win-id">②</span></td><td class="win-name">Top 100</td><td class="win-desc">Top 100 by 24h volume on Robinhood Chain. Full market data, X activity, and a direct link to the chart. <span class="chain-pill cp-rh">RH</span></td></tr>
       <tr><td><span class="win-id">③</span></td><td class="win-name">Watchlist</td><td class="win-desc">Tokens you're tracking. Set your own refresh rate per address, watch KOL and smart money flow in, and kick off a deep report any time. <span class="chain-pill cp-all">all chains</span></td></tr>
       <tr><td><span class="win-id">④</span></td><td class="win-name">New ≤3 Days</td><td class="win-desc">Top 100 filtered to tokens under 72 hours old. On-chain age is verified so migrated contracts don't sneak in and inflate the list. <span class="chain-pill cp-rh">RH</span></td></tr>
-      <tr><td><span class="win-id">⑤</span></td><td class="win-name">AI · Robinhood</td><td class="win-desc">Runs a scoring pass every 10 minutes. Pulls holder data, trade history, and X signals, then writes a 1–100 score with a plain-English reason for each token in your market-cap range. <span class="chain-pill cp-rh">RH</span></td></tr>
+      <tr><td><span class="win-id">⑤</span></td><td class="win-name">AI · Robinhood</td><td class="win-desc">Runs a scoring pass every 10 minutes. Pulls holder data, trade history, and X signals, then writes a 1-100 score with a plain-English reason for each token in your market-cap range. <span class="chain-pill cp-rh">RH</span></td></tr>
       <tr><td><span class="win-id">⑥</span></td><td class="win-name">AI · BSC</td><td class="win-desc">Same scoring engine as ⑤, running independently on BSC. Its market-cap band and age cutoff are set separately. <span class="chain-pill cp-bsc">BSC</span></td></tr>
       <tr><td><span class="win-id">⑦</span></td><td class="win-name">AI · Base</td><td class="win-desc">Same scoring engine as ⑤, running independently on Base. Its market-cap band and age cutoff are set separately. <span class="chain-pill cp-base">Base</span></td></tr>
-      <tr><td><span class="win-id">⑧</span></td><td class="win-name">Deep Report</td><td class="win-desc">Paste a contract address, pick a chain. It pulls holders, trades, and X posts and builds an illustrated PDF with a price chart, volume bars, and holder breakdown. Usually done in 3–8 minutes. <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-bsc">BSC</span><span class="chain-pill cp-base">Base</span></td></tr>
+      <tr><td><span class="win-id">⑧</span></td><td class="win-name">Deep Report</td><td class="win-desc">Paste a contract address, pick a chain. It pulls holders, trades, and X posts and builds an illustrated PDF with a price chart, volume bars, and holder breakdown. Usually done in 3-8 minutes. <span class="chain-pill cp-rh">RH</span><span class="chain-pill cp-bsc">BSC</span><span class="chain-pill cp-base">Base</span></td></tr>
       <tr><td><span class="win-id">⚙️</span></td><td class="win-name">Admin</td><td class="win-desc">One place to tune the whole backend: concurrency, AI model, refresh intervals per window, market-cap bands for each scorer, Telegram alert routing, and a live view of what's currently running.</td></tr>
     </tbody>
   </table>
@@ -843,7 +843,7 @@ function fakeReport(){
   },380);}
 
 /* nav active link on scroll */
-const sections=['demo','about','chains','windows','requirements','stack'];
+const sections=['demo','about','windows','stack'];
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;document.querySelectorAll('.navlinks a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});},{rootMargin:'-50% 0px -50% 0px'});
 sections.forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el);});
 
@@ -873,7 +873,7 @@ document.addEventListener('click',function(e){
 });
 </script>
 
-<!-- ── ANIMATION LAYER (additive — no existing code changed) ── -->
+<!-- ── ANIMATION LAYER (additive - no existing code changed) ── -->
 <style>
 /* Smooth anchor scrolling */
 html{scroll-behavior:smooth;}
@@ -980,7 +980,7 @@ html{scroll-behavior:smooth;}
   /* section labels + titles */
   document.querySelectorAll('.sec-label,.sec-title').forEach(function(el){addRv(el,'');});
 
-  /* chain cards, feat, stack items — staggered */
+  /* chain cards, feat, stack items - staggered */
   ['.chain-card','.feat','.stack-item'].forEach(function(sel){
     document.querySelectorAll(sel).forEach(function(el,i){addRv(el,ds[i%ds.length]);});
   });
