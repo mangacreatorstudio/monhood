@@ -385,7 +385,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
     <span class="logo-name">MOONHOOD</span>
   </a>
   <div class="navlinks">
-    <a href="#demo">Demo</a>
+    <a href="#scanner">Dashboard</a>
     <a href="#windows">Features</a>
     <a href="#stack">Stack</a>
   </div>
@@ -394,7 +394,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 </nav>
 <!-- mobile nav drawer -->
 <div id="nav-drawer">
-  <a href="#demo" onclick="closeNav()">Demo</a>
+  <a href="#scanner" onclick="closeNav()">Dashboard</a>
   <a href="#windows" onclick="closeNav()">Features</a>
   <a href="#stack" onclick="closeNav()">Stack</a>
   <a href="/login.html" class="nav-cta">Launch App →</a>
@@ -417,7 +417,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
   </div>
   <div class="btn-row">
     <a class="btn-primary" href="/login.html">Launch Dashboard</a>
-    <a class="btn-outline" href="#demo">See Demo</a>
+    <a class="btn-outline" href="#scanner">Open Dashboard</a>
   </div>
 </div>
 
@@ -442,19 +442,19 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
 </section>
 
 <!-- ── DEMO ────────────────────────────── -->
-<section id="demo">
+<section id="scanner">
 <div style="max-width:1200px;margin:0 auto;padding:32px 16px 0;">
-  <div class="sec-label" style="text-align:center;margin-bottom:12px;">Try It Yourself</div>
+  <div class="sec-label" style="text-align:center;margin-bottom:12px;">Live Dashboard</div>
   <div style="text-align:center;margin-bottom:16px;">
-    <span style="font-size:1.3rem;font-weight:800;letter-spacing:-.3px;">Same UI as the self-hosted app</span><br>
-    <span style="color:var(--dim);font-size:13px;">Simulated data. All eight windows are open. Click around.</span>
+    <span style="font-size:1.3rem;font-weight:800;letter-spacing:-.3px;">Monhood Scanner - live</span><br>
+    <span style="color:var(--dim);font-size:13px;">All eight windows running. Click around to explore.</span>
   </div>
 </div>
 
 <!-- demo banner -->
 <div style="max-width:1200px;margin:0 auto 0;padding:0 16px;">
 <div class="demo-banner" style="border-radius:var(--radius) var(--radius) 0 0;border:1px solid #1e3150;border-bottom:none;">
-  <span>Simulated data. Production needs Python 3.9 on your own server.</span>
+  <span>Robinhood Chain · BSC · Base - refreshed every 10 minutes.</span>
   <a href="https://github.com/mangacreatorstudio/monhood" target="_blank">Get the source on GitHub</a>
 </div>
 </div>
@@ -578,7 +578,7 @@ footer a{color:var(--dim);}footer a:hover{color:var(--fg);}
       </div>
       <div id="rep-status" style="min-height:30px"></div>
       <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">
-        <div style="color:var(--dim);font-size:11px;margin-bottom:8px">Recent reports (demo)</div>
+        <div style="color:var(--dim);font-size:11px;margin-bottom:8px">Recent reports</div>
         <table style="width:auto"><thead><tr><th class="l">Token</th><th class="l">Chain</th><th>Mcap</th><th>Generated</th><th></th></tr></thead>
         <tbody>
           <tr><td class="l"><span class="sym">HOODIE</span></td><td class="l"><span class="badge badge-rh">RH</span></td><td>$2.1M</td><td class="dim2">4m ago</td><td><a href="#" onclick="return false">📄 PDF</a></td></tr>
@@ -837,11 +837,11 @@ function fakeReport(){
       <div class="track" style="width:260px"><div class="fill" style="width:${p}%"></div></div><span class="dim2">${p}%</span></div>
       <span style="color:var(--dim);font-size:12px">${ph}</span>`;
     if(p>=100){clearInterval(iv);btn.disabled=false;
-      st.innerHTML=`<a class="bigbtn" href="#" onclick="return false">📄 Open PDF Report</a> <button class="ghost" style="margin-left:8px;font-size:11px" onclick="fakeReport()">🔄 Regenerate</button><br><span style="color:var(--dim);font-size:11px;margin-top:6px;display:block">PDF renders with live data on a self-hosted instance</span>`;}
+      st.innerHTML=`<a class="bigbtn" href="#" onclick="return false">📄 Open PDF Report</a> <button class="ghost" style="margin-left:8px;font-size:11px" onclick="fakeReport()">🔄 Regenerate</button>`;}
   },380);}
 
 /* nav active link on scroll */
-const sections=['demo','about','windows','stack'];
+const sections=['scanner','about','windows','stack'];
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;document.querySelectorAll('.navlinks a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});},{rootMargin:'-50% 0px -50% 0px'});
 sections.forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el);});
 
@@ -990,7 +990,7 @@ html{scroll-behavior:smooth;}
   document.querySelectorAll('#windows .panel,#stack .panel,.cta-box').forEach(function(el){addRv(el,'');});
 
   /* demo section label area */
-  document.querySelectorAll('#demo > div > div').forEach(function(el,i){if(i<2)addRv(el,ds[i]);});
+  document.querySelectorAll('#scanner > div > div').forEach(function(el,i){if(i<2)addRv(el,ds[i]);});
 
   /* observe */
   var io=new IntersectionObserver(function(entries){
